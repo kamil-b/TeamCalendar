@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<link rel=" stylesheet" type="text/css" href="css/addtip.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+	<link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+<meta charset="ISO-8859-1"></meta>
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container"></div>
+	</div>
+	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div class="container">
+		<form action="" th:object="${tip}" method="POST">
+			<div class="row space">
+				<!-- <label>Dział: </label> <input th:field="*{section}" /> -->
+				<label>Section:</label><select th:field="${tip.section}"
+					name="Sections">
+					<th:block th:object="${sectionsList}"
+						th:each="sect : ${sectionsList}">
+						<option value="Sections" th:text="${sect}">section</option>
+					</th:block>
+				</select>
+				<p th:each="error: ${#fields.errors('section')}" th:text="${error}">Validation
+					error</p>
+			</div>
+			<div class="row space">
+				<label>Title:</label> <input th:field="*{title}" />
+				<p th:each="error: ${#fields.errors('title')}" th:text="${error}">Validation
+					error</p>
+			</div>
+			<div class="row space ">
+				<label>Tip content:</label>
+				<textarea rows="4" cols="50" th:field="*{content}"></textarea>
+				<p th:each="error: ${#fields.errors('content')}" th:text="${error}">Validation
+					error</p>
+			</div>
+			<div class="row space ">
+				<label>Hint:</label>
+				<textarea rows="4" cols="30" th:field="*{hint}"></textarea>
+				<p th:each="error: ${#fields.errors('hint')}" th:text="${error}">Validation
+					error</p>
+			</div>
+			<button type="submit">submit</button>
+		</form>
+	</div>
+</body>
+</html>

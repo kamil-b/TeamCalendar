@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+<link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+<title>Administration panel</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Administration panel</h1>
+			<p th:text="'Welcome, ' + ${name}">Welcome!</p>
+		</div>
+	</div>
+	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div class="container">
+		<div th:each="board : ${boardList}">
+			<form th:object="${removedBoard}" method="POST" action="">
+				<table>
+					<tr>
+						<td th:text="${board.name}" th:field="${name}">name of board</td>
+						<td th:text="${board.description}">description</td>
+						<td><button type="submit">Remove</button></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div>
+			<form th:object="${removedUser}" method="POST" action="">
+				<table>
+					<tr th:each="user : ${userList}">
+						<td th:text="${user.name}" th:field="${name}">Username</td>
+						<td th:text="${user.email}">Email</td>
+						<td th:text="${user.role}">Role</td>
+						<td th:text="${user.superior}">Superior</td>
+						<td><textarea th:text="${user.id}" hidden="true"
+								th:field="${id}"></textarea>id</td>
+						<td><button type="submit">Remove</button></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

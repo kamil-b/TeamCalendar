@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/addboard.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+<link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Create new board</h1>
+		</div>
+	</div>
+	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div class="container registrationform">
+		<form action="" method="POST" th:object="${board}">
+			<div class="inputrow">
+				<label> Owner:</label>
+				<select th:field="${board.ownerName}" >
+					<option th:value="${owner}" th:text="${owner}"></option>
+				</select> <label class=" error"
+					th:each="error : ${#fields.errors('ownerName')}" th:text="${error}">Validation
+					error</label>
+			</div>
+			<div class="inputrow">
+			<label> Board name:</label>
+				<input th:field="${board.name}" placeholder="board name" /> <label
+					class=" error" th:each="error : ${#fields.errors('name')}"
+					th:text="${error}">Validation error</label>
+			</div>
+			<div class="inputrow">
+			<label> Description:</label>
+				<textarea rows="5" th:field="${board.description}"
+					placeholder="short information about creating board"></textarea>
+				<label class=" error"
+					th:each="error : ${#fields.errors('description')}"
+					th:text="${error}">Validation error</label>
+			</div>
+			<div class="inputrow">
+				<button type="submit" class="subbutton red">Register board</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

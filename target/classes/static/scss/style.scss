@@ -1,0 +1,133 @@
+h4 {
+    font-style: normal;
+}
+
+blockquote {
+    margin-left: 20px;
+    font-style: italic;
+}
+
+body {
+    margin-bottom: 50px;
+}
+
+.git {
+    background-color: azure;
+}
+
+.gitframe {
+    background-color: lightblue;
+    border-radius: 10px;
+    display: ;
+}
+
+.linux {
+    background-color: papayawhip;
+}
+
+.linuxframe {
+    background-color: lightpink;
+    border-radius: 10px;
+}
+
+.maven {
+    background-color: beige;
+}
+
+.other {
+    background-color: snow;
+}
+
+.otherframe {
+    background-color: gainsboro;
+    border-radius: 10px;
+}
+
+.mavenframe {
+    background-color: lightgreen;
+    border-radius: 10px;
+}
+
+#mavenframe_acvite {
+    background-color: lightgreen;
+    border-radius: 10px;
+    display: ;
+}
+
+.mavenframeselection {
+    background-color: lightgreen;
+    border-radius: 10px;
+}
+
+.gitframeselection {
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+.space {
+    padding: 5px;
+}
+
+input {
+    min-width: 300px;
+    min-height: 50px;
+}
+
+#header1 {
+    color: white;
+    margin-bottom: 0px;
+    background-image: url(resources/header.jpg);
+    background-position: right bottom, left top;
+}
+
+#hidebutton {
+    color: white;
+    background-color: #222;
+    transition: background-color 0.5s ease;
+    resize: both 200%;
+    margin-right: 25px;
+    margin-top: 7px;
+    border-radius: 0px;
+}
+
+#hidebutton:hover {
+    background-color: grey;
+}
+
+li {
+    transition: background-color 0.5s ease;
+}
+
+
+/*
+li:hover {
+    background-color: grey;
+}
+*/
+
+
+/*
+.answer {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+    height: 0;
+}
+
+.question:hover+.answer {
+    opacity: 1;
+    transform: scale(1);
+    height: auto;
+}
+*/
+
+
+/*
+
+.a:visited+.answer {
+    opacity: 1;
+    transform: scale(1);
+    height: auto;
+}
+*/

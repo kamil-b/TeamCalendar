@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<link rel="stylesheet" type="text/css" href="/css/events.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+<link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+<title>Spring Security Example</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Your events</h1>
+		</div>
+	</div>
+	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div class="container">
+		<div>
+			<form action="" method="POST" th:object="${eventForm}">
+				<div class="row">
+					<div class="col-sm-10 nopadding">
+						<button type="submit" class=" subbutton red">Submit</button>
+					</div>
+				</div>
+				<div class="row"
+					th:each="currentEvent , event : ${eventForm.eventslist}">
+					<div class="datecell col-sm-2 nopadding">
+						<label th:text="${formatter.print(currentEvent.date)}">date</label>
+					</div>
+					<div class="col-sm-8 nopadding">
+						<div class="weekend"
+							th:if="${eventForm.isWeekend(currentEvent.date) == true}">
+							<ul>
+								<li><label>WEEKEND</label> <input hidden="true"
+									th:value="${currentEvent.id}"
+									th:field="${eventForm.eventslist[__${event.index}__].id}" /> <input
+									hidden="true" th:value="${currentEvent.username}"
+									th:field="${eventForm.eventslist[__${event.index}__].username}" />
+									<input hidden="true" th:value="${currentEvent.date}"
+									th:field="${eventForm.eventslist[__${event.index}__].date}" />
+									<input hidden="true" th:value="${et}"
+									th:field="${eventForm.eventslist[__${event.index}__].eventType}" />
+								</li>
+							</ul>
+						</div>
+						<div th:unless="${eventForm.isWeekend(currentEvent.date) == true}">
+							<input hidden="true" th:value="${currentEvent.id}"
+								th:field="${eventForm.eventslist[__${event.index}__].id}" /> <input
+								hidden="true" th:value="${currentEvent.username}"
+								th:field="${eventForm.eventslist[__${event.index}__].username}" />
+							<input hidden="true" th:value="${currentEvent.date}"
+								th:field="${eventForm.eventslist[__${event.index}__].date}" />
+							<ul>
+								<li th:each="et : ${eventtypes}"><input hidden="true"
+									th:id="${et}+'-' +${currentEvent.date}"
+									th:classappend="'event-'+ ${et}" th:name="${currentEvent.date}"
+									type="radio" th:value="${et}"
+									th:field="${eventForm.eventslist[__${event.index}__].eventType}" />
+									<label class="radio-inline"
+									th:for="${et}+'-' +${currentEvent.date}" th:text="${et}">eventType</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2 nopadding"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-10 nopadding">
+						<button type="submit" class=" subbutton red">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="footer"></div>
+</body>
+</html>

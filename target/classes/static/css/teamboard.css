@@ -1,0 +1,88 @@
+.subbutton {
+  width: 100%;
+  border: 0;
+  color: white;
+  padding: 14px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; }
+
+.red {
+  background-color: #f44336; }
+
+.red:hover {
+  background-color: red; }
+
+.event-HOMEWORK {
+  background-color: mediumvioletred; }
+
+.event-NO_EVENT {
+  background-color: gainsboro; }
+
+.event-VACATION {
+  background-color: greenyellow; }
+
+.event-SICK_LEAVE {
+  background-color: deepskyblue; }
+
+.event-TRAINING {
+  background-color: yellow; }
+
+/*div {
+    border-style: solid;
+    border-color: gainsboro;
+    border-width: 1px;
+}*/
+label {
+  padding-top: 35px;
+  height: 120px;
+  text-align: center;
+  vertical-align: middle;
+  display: block;
+  line-height: 150%;
+  font-size: 20px; }
+
+.boardcontainer {
+  /*    padding-left: 20px;
+  padding-right: 20px;*/
+  text-align: center; }
+
+.dayname-cell {
+  text-align: center;
+  vertical-align: middle;
+  background-color: #27124c;
+  color: white; }
+
+.user-cell {
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  background-color: #27124c;
+  padding: 5px; }
+
+p {
+  font-size: 22px;
+  margin: 0 0 0;
+  font-weight: 500;
+  padding: 10px; }
+
+img {
+  width: 100%;
+  height: 100%; }
+
+.teamnamecontainer {
+  padding-left: 100px;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #3399FF, #666699);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #3399FF, #666699);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #3399FF, #666699);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #3399FF, #666699);
+  /* Standard syntax (must be last) */
+  margin-bottom: 0px; }
+
+.teamnamecontainer p {
+  font-size: 50px; }

@@ -1,0 +1,72 @@
+table>tr {
+    text-align: center;
+}
+
+tr {
+    padding: 5px;
+    border-style: none;
+}
+
+.columnnames {
+    font-size: 16px;
+    background-color: black;
+    color: white;
+}
+
+label {
+    font-size: 16px;
+    width: 100%;
+}
+
+.subbutton {
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px;
+}
+
+.green {
+    background-color: #4CAF50;
+}
+
+.red {
+    background-color: #f44336;
+}
+
+.green:hover {
+    background-color: green;
+}
+
+.red:hover {
+    background-color: red;
+}
+
+.memberscell:nth-child(odd) {
+    background-color: whitesmoke;
+}
+
+.memberscell:nth-child(even) {
+    background-color: ghostwhite;
+}
+
+.notvisiable {
+    visibility: hidden;
+}
+
+.menuframe {
+    text-align: center;
+}
+
+.menuframe button {
+    width: 80%;
+}
+
+.contentframe {}
+
+.boardsframe {
+    padding: 5px;
+}

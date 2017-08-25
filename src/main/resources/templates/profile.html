@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+<title>Profile update</title>
+<link rel=" stylesheet" type="text/css" href="/css/profile.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+<link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container"></div>
+	</div>
+	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div class="container">
+		
+		<form th:object="${user}" method="POST" action="">
+			<div class="row">
+				<textarea hidden="true" th:text="${user.id}" th:field="*{id}">id:</textarea>
+			</div>
+			<div class="row">
+				<label class="col-sm-2">Name:</label><label class="col-sm-10"
+					th:text="${user.name}"></label>
+				<textarea hidden="true" th:text="${user.name}" th:field="*{name}">id:</textarea>
+			</div>
+			<div class="row">
+				<label class="col-sm-2">Email:</label><input class="col-sm-10"
+					th:field="*{email}" />
+			</div>
+			<div class="row">
+				<label class="col-sm-2">Role:</label> <select class="col-sm-10"
+					th:field="*{role}">
+					<option th:each="role : ${allRoles}" th:value="${role}"
+						th:text="${role}"></option>
+				</select>
+			</div>
+			<div class="row">
+				<label class="col-sm-2">Superior:</label> <select class="col-sm-10"
+					th:field="*{superior}">
+					<option th:each="superior : ${allSuperiors}"
+						th:value="${superior.name}"
+						th:text="${superior.name + ' (' + superior.email + ')'}"></option>
+				</select>
+			</div>
+			<div class="row">
+				<button type="submit" class="subbutton red">Submit</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Add events</title>
+<link rel="stylesheet" type="text/css" href="/css/addevents.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+<link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Events to add</h1>
+		</div>
+	</div>
+	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div class="container">
+		<div th:object="${eventForm}">
+			<div class="row"
+				th:each="currentEvent , event : ${eventForm.eventslist}">
+				<label class="col-sm-2" th:text="${currentEvent.date}"></label> <label
+					class="col-sm-5" th:text="${currentEvent.eventType}"
+					th:classappend="${'event-' + currentEvent.eventType}"></label>
+			</div>
+		</div>
+		<form method="POST" action="" th:object="${content}">
+			<div class="row">
+				<label>Send notification to Line Manager: </label> <input
+					type="checkbox" th:field="*{sendMail}" />
+			</div>
+			<div class="row">
+				<label class="col-sm-3">Additional informations:</label>
+				<textarea class="col-sm-7" th:field="*{mailContent}"></textarea>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row">
+				<button type ="submit" class="col-sm-10 subbutton red">Submit
+				</button>
+				<div class="col-sm-2"></div>
+			</div>
+		</form>
+	</div>
+	<div class="footer">
+	</div>
+</body>
+</html>
