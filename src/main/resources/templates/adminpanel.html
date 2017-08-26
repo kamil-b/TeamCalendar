@@ -18,11 +18,11 @@
 	</div>
 	<div th:replace="fragments/navbar :: header_logged">...</div>
 	<div class="container">
-		<div th:each="board : ${boardList}">
+		<div>
 			<form th:object="${removedBoard}" method="POST" action="">
 				<table>
-					<tr>
-						<td th:text="${board.name}" th:field="${name}">name of board</td>
+					<tr th:each="board : ${boardList}">
+						<td th:text="${board.name}" th:field="*{name}">name of board</td>
 						<td th:text="${board.description}">description</td>
 						<td><button type="submit">Remove</button></td>
 					</tr>
@@ -33,12 +33,12 @@
 			<form th:object="${removedUser}" method="POST" action="">
 				<table>
 					<tr th:each="user : ${userList}">
-						<td th:text="${user.name}" th:field="${name}">Username</td>
+						<td th:text="${user.name}" th:field="*{name}">Username</td>
 						<td th:text="${user.email}">Email</td>
 						<td th:text="${user.role}">Role</td>
 						<td th:text="${user.superior}">Superior</td>
 						<td><textarea th:text="${user.id}" hidden="true"
-								th:field="${id}"></textarea>id</td>
+								th:field="*{id}"></textarea>id</td>
 						<td><button type="submit">Remove</button></td>
 					</tr>
 				</table>

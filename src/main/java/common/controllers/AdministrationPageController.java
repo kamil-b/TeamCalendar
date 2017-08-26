@@ -55,13 +55,13 @@ public class AdministrationPageController {
 		System.out.println(removedUser.toString());
 		System.out.println(removedBoard.toString());
 
-		if (removedUser.getId() != null && userService.userExists(removedUser.getName())) {
+		if (removedUser.getId() != null ) {
 			User user = userService.findById(removedUser.getId());
 			userService.deleteUser(user);
 			System.out.println("removed:" + user.toString());
 		}
 
-		if (removedBoard != null && boardService.findByName(removedBoard.getName()) != null) {
+		if (boardService.findByName(removedBoard.getName()) != null) {
 			Board board = boardService.findByName(removedBoard.getName());
 			boardService.deleteBoard(board);
 			System.out.println("removed:" + board.toString());
