@@ -11,6 +11,7 @@
 <title>Spring Security Example</title>
 </head>
 <body>
+<div>
 	<div class="jumbotron">
 		<div class="container">
 			<div th:if="${logged} == false">
@@ -54,18 +55,24 @@
 							BOARD</button>
 					</form>
 				</div>
-				<div class="boardframe">
-					<h1>Boards:</h1>
-					<div th:each="board : ${boards}">
-						<form class="col-sm-3" method="GET"
-							th:action="@{'/board/' + ${board.name}}">
-							<button type="submit" class=" subbutton green"
-								th:text="${board.name}"></button>
-						</form>
-					</div>
+				<div class="row" th:if="${isAdmin} == true">
+					<form method="GET" th:action="@{'/adminpanel'}">
+						<button type="submit" class=" subbutton green">ADMIN PANEL</button>
+					</form>
+				</div>
+			</div>
+			<div class="boardframe">
+				<h1>Boards:</h1>
+				<div th:each="board : ${boards}">
+					<form class="col-sm-3" method="GET"
+						th:action="@{'/board/' + ${board.name}}">
+						<button type="submit" class=" subbutton green"
+							th:text="${board.name}"></button>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

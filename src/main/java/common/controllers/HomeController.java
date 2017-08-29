@@ -7,23 +7,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import common.entities.enums.UserRole;
 import common.service.BoardService;
 import common.service.SecurityService;
+import common.service.UserService;
 
 @Controller
 public class HomeController {
 
 	@Autowired
 	BoardService boardService;
-	
+
+	@Autowired
+	UserService userService;
+
 	@Autowired
 	SecurityService securityService;
 
 	@RequestMapping(value = { "", "/", "/home" })
 	public String showHome(final Principal principal, Model model) {
-		model.addAttribute("logged", securityService.isLogged(principal));
+		boolean logged = securityService.isLogged(principal);
+		model.addAttribute("logged", logged);
+		if (logged) {
+			model.addAttribute("isAdmin",
+					userService.findByName(principal.getName()).getUserRole().equals(UserRole.ADMIN));
+		}
 		model.addAttribute("name", securityService.getCurrentUserName(principal));
-		model.addAttribute("boards",boardService.findAll());
+		model.addAttribute("boards", boardService.findAll());
 		return "home";
 
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import common.entities.Board;
 import common.entities.User;
 import common.entities.dto.UserDto;
+import common.entities.enums.UserRole;
 import common.service.BoardService;
 import common.service.SecurityService;
 import common.service.UserService;
@@ -33,8 +34,8 @@ public class AdministrationPageController {
 	@RequestMapping(value = "/adminpanel", method = RequestMethod.GET)
 	public String loadAdministrationPage(Principal principal, RedirectAttributes redirectAttributes, Model model) {
 
-		// just temporary TODO:
-		if (securityService.isLogged(principal) && !"kamil".equals(securityService.getCurrentUserName(principal))) {
+		UserRole role = userService.findByName(securityService.getCurrentUserName(principal)).getUserRole();
+		if (securityService.isLogged(principal) && UserRole.ADMIN.toString().equals(role)) {
 			redirectAttributes.addFlashAttribute("reason", "You dont have permision to visit this site !!");
 			return "redirect:/error";
 		}
