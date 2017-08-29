@@ -18,22 +18,28 @@
 	</div>
 	<div th:replace="fragments/navbar :: header_logged">...</div>
 	<div class="container">
-		<div>
-			<form th:object="${removedBoard}" method="POST" action="">
+		<!-- 	<div>
+			<form th:each="board : ${boardList}" th:object="${removedBoard}"
+				method="POST" action="">
 				<table>
-					<tr th:each="board : ${boardList}">
-						<td th:text="${board.name}" th:field="*{name}">name of board</td>
-						<td th:text="${board.description}">description</td>
+					<tr>
+						<td th:text="${board.name}">Name of board</td>
+						<td><textarea th:value="${board.name}" hidden="true"
+								th:name="*{removedBoard}"></textarea></td>
+						<td th:text="${board.description}" th:field="*{description}">description</td>
 						<td><button type="submit">Remove</button></td>
 					</tr>
 				</table>
 			</form>
-		</div>
+		</div> -->
 		<div>
-			<form th:object="${removedUser}" method="POST" action="">
+			<form th:each="user : ${userList}" th:object="${removedUser}"
+				method="POST" action="">
 				<table>
-					<tr th:each="user : ${userList}">
-						<td th:text="${user.name}" th:field="*{name}">Username</td>
+					<tr>
+						<td th:text="${user.name}">Username</td>
+						<td><textarea th:text="${user.name}" hidden="true"
+								th:field="*{name}"></textarea></td>
 						<td th:text="${user.email}">Email</td>
 						<td th:text="${user.role}">Role</td>
 						<td th:text="${user.superior}">Superior</td>

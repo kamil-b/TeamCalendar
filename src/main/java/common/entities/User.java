@@ -17,21 +17,24 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import common.entities.enums.JobRole;
+import common.entities.enums.UserRole;
 
 @Entity
 public class User implements UserDetails {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String superior;
 	private String name;
 	private String password;
-	
+
 	@ManyToMany(targetEntity = Board.class, cascade = CascadeType.ALL)
 	private List<Board> boards = new ArrayList<Board>();
 	private String email;
 	private JobRole role;
+	private String remoteWorkLocation;
+	private UserRole userRole = UserRole.USER;
 
 	@Column(columnDefinition = "image")
 	private byte[] image;
@@ -152,10 +155,27 @@ public class User implements UserDetails {
 		this.superior = superior;
 	}
 
+	public String getRemoteWorkLocation() {
+		return remoteWorkLocation;
+	}
+
+	public void setRemoteWorkLocation(String remoteWorkLocation) {
+		this.remoteWorkLocation = remoteWorkLocation;
+	}
+
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", superior=" + superior + ", name=" + name + ", password=" + password + ", boards="
-				+ boards + ", email=" + email + ", role=" + role + ", image=" + Arrays.toString(image) + "]";
+				+ boards + ", email=" + email + ", role=" + role + ", remoteWorkLocation=" + remoteWorkLocation
+				+ ", userRole=" + userRole + ", image=" + Arrays.toString(image) + "]";
 	}
 
 }

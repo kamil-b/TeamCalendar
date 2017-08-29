@@ -29,8 +29,7 @@ public class UpdateProfileController {
 	@RequestMapping(value = "/user/{username}/profile", method = RequestMethod.GET)
 	public String showUserPageDetails(@PathVariable("username") String username, Model model, Principal principal,
 			RedirectAttributes redirectAttributes) {
-		
-		
+
 		if (!username.equals(principal.getName())) {
 			redirectAttributes.addFlashAttribute("reason", "You dont have permision to visit this site !!");
 			return "redirect:/error";
@@ -50,13 +49,14 @@ public class UpdateProfileController {
 	@RequestMapping(value = "/user/{username}/profile", method = RequestMethod.POST)
 	public String updateUserProfile(@PathVariable("username") String username, @ModelAttribute("user") UserDto userDto,
 			RedirectAttributes redirectAttributes, BindingResult bindingResult) {
-	
+
 		User updated = userService.returnUser(userDto);
 		User user = userService.findById(updated.getId());
 		user.setEmail(updated.getEmail());
 		user.setRole(updated.getRole());
 		user.setSuperior(updated.getSuperior());
-	
+		user.setRemoteWorkLocation(updated.getRemoteWorkLocation());
+
 		userService.save(user);
 
 		redirectAttributes.addFlashAttribute("reason", "Profile updated succesfully !");

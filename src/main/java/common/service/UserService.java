@@ -35,7 +35,7 @@ public class UserService implements UserDetailsService {
 	public void deleteUser(User user) {
 		repository.delete(user);
 	}
-	
+
 	public User findById(Long id) {
 		return repository.findById(id);
 	}
@@ -80,6 +80,7 @@ public class UserService implements UserDetailsService {
 		userDto.setEmail(user.getEmail());
 		userDto.setRole(user.getRole());
 		userDto.setSuperior(user.getSuperior());
+		userDto.setRemoteWorkLocation(user.getRemoteWorkLocation());
 		return userDto;
 	}
 
@@ -92,6 +93,7 @@ public class UserService implements UserDetailsService {
 		user.setEmail(userDto.getEmail());
 		user.setRole(userDto.getRole());
 		user.setSuperior(userDto.getSuperior());
+		user.setRemoteWorkLocation(userDto.getRemoteWorkLocation());
 		return user;
 	}
 

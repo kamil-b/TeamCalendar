@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import common.entities.Board;
 
 import common.entities.enums.JobRole;
+import common.entities.enums.UserRole;
 import common.helpers.customannotations.PasswordMatches;
 
 @PasswordMatches
@@ -22,25 +23,22 @@ public class UserDto {
 	@NotEmpty
 	@Column(unique = true)
 	private String name;
-
 	@NotNull
 	@NotEmpty
 	private String password;
-
 	@NotNull
 	@NotEmpty
 	private String matchingPassword;
-
 	@NotNull
 	@NotEmpty
 	private String email;
-
 	private Long id;
-
 	@Enumerated(EnumType.STRING)
 	private JobRole role;
-
 	private String superior;
+	private String remoteWorkLocation;
+	@Enumerated(EnumType.STRING)
+	private UserRole userRole = UserRole.USER;
 
 	private List<Board> boards = new ArrayList<Board>();
 
@@ -108,11 +106,27 @@ public class UserDto {
 		this.id = id;
 	}
 
+	public String getRemoteWorkLocation() {
+		return remoteWorkLocation;
+	}
+
+	public void setRemoteWorkLocation(String remoteWorkLocation) {
+		this.remoteWorkLocation = remoteWorkLocation;
+	}
+
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDto [name=" + name + ", password=" + password + ", matchingPassword=" + matchingPassword
-				+ ", email=" + email + ", id=" + id + ", role=" + role + ", superior=" + superior + ", boards=" + boards
-				+ "]";
+				+ ", email=" + email + ", id=" + id + ", role=" + role + ", superior=" + superior
+				+ ", remoteWorkLocation=" + remoteWorkLocation + ", userRole=" + userRole + ", boards=" + boards + "]";
 	}
 
 }
