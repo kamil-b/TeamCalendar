@@ -66,6 +66,7 @@ public class UserService implements UserDetailsService {
 		registered.setEmail(userDto.getEmail());
 		registered.setRole(userDto.getRole());
 		registered.setSuperior(userDto.getSuperior());
+		registered.setUserRole(userDto.getUserRole());
 		repository.save(registered);
 		return registered;
 	}
@@ -80,6 +81,7 @@ public class UserService implements UserDetailsService {
 		userDto.setEmail(user.getEmail());
 		userDto.setRole(user.getRole());
 		userDto.setSuperior(user.getSuperior());
+		userDto.setUserRole(user.getUserRole());
 		userDto.setRemoteWorkLocation(user.getRemoteWorkLocation());
 		return userDto;
 	}

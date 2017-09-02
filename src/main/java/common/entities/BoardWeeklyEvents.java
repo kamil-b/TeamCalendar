@@ -45,8 +45,9 @@ public class BoardWeeklyEvents {
 		return eventsInThisWeek;
 	}
 
-	public boolean isEventToday(LocalDate date1, LocalDate date2) {
-		if (date1.isEqual(date2)) {
+	public boolean isEventToday(LocalDate date) {
+		LocalDate now = new LocalDate();
+		if (now.getDayOfYear() == date.getDayOfYear()) {
 			return true;
 		} else {
 			return false;

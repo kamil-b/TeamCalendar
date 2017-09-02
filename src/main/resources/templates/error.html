@@ -13,12 +13,12 @@
 		<div class="container"><h1>Upss...</h1></div>
 	</div >
 	<div class="container">
-	<h3>Something is not quite right.</h3>
-	<p th:text="${reason}">error reason</p>
+	<h2>Something is not quite right...</h2>
+	<p style="color:red; font-size: 16px;" th:text="${reason}">error reason</p>
 	
-	<p>
-		Click <a th:href="@{/home}">here</a> to go back to home page.
-	</p>
+	<h3>
+		<a th:href="@{/home}">Take me  back  to home page.</a>
+	</h3>
 	</div>
 </body>
 </html>

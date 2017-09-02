@@ -25,7 +25,7 @@ import common.service.UserService;
 public class RegistrationController {
 
 	@Autowired
-	UserService service;
+	UserService userService;
 
 	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
 	public String showRegistrationForm(WebRequest request, Model model, Principal principal) {
@@ -47,15 +47,21 @@ public class RegistrationController {
 			RedirectAttributes redirectAttributes, Errors errors) {
 
 		if (!result.hasErrors()) {
-			service.createUserAccount(userDto, result);
+			if (userService.userExists(userDto.getName())) {
+				return new ModelAndView("registration", "user", userDto)
+						.addObject("allRoles", Arrays.asList(JobRole.values()))
+						.addObject("reason", "Username " + userDto.getName() + " allready exists!");
+			} else {
+				userService.createUserAccount(userDto, result);
+			}
 		}
 
 		if (result.hasErrors()) {
-
 			return new ModelAndView("registration", "user", userDto).addObject("allRoles",
 					Arrays.asList(JobRole.values()));
 		} else {
 			return new ModelAndView("successRegister", "user", userDto);
+
 		}
 	}
 

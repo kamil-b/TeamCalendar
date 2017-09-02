@@ -19,7 +19,7 @@
 				<div class="col-sm-2 dayname-cell">
 					<p>MEMBERS</p>
 				</div>
-				<div class="col-sm-2 dayname-cell" th:object="${week}" 
+				<div class="col-sm-1 dayname-cell" th:object="${week}"
 					th:each="day : ${week}">
 					<p th:text="${day}"></p>
 				</div>
@@ -33,7 +33,8 @@
 						<p th:text="${user.name}">username</p>
 					</div>
 				</div>
-				<div class="col-sm-2 event" th:each="day : ${events.week} " th:classappend="${events.isEventToday(day) ? 'today' : 'test'}">
+				<div class="col-sm-1 event" th:each="day : ${events.week} "
+					th:classappend="${events.isEventToday(day) ? 'today' : 'test'}">
 					<div th:each="event : ${events.getEventsBySpecificDate(day)}">
 						<label th:if="${event.username == user.name}"
 							th:classappend="'event-' + ${event.eventType}"

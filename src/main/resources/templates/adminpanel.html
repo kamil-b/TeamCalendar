@@ -5,6 +5,7 @@
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/adminpanel.css" />
 <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
 <link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
 <title>Administration panel</title>
@@ -33,19 +34,32 @@
 			</form>
 		</div> -->
 		<div>
-			<form th:each="user : ${userList}" th:object="${removedUser}"
-				method="POST" action="">
+			<table>
+				<tr class="row">
+					<td class="col-sm-1"></td>
+					<td class="col-sm-2">Username</td>
+					<td class="col-sm-3">Email</td>
+					<td class="col-sm-2">Role</td>
+					<td class="col-sm-2">Superior</td>
+					<td class="col-sm-1">Action</td>
+					<td class="col-sm-1"></td>
+				</tr>
+			</table>
+			<form th:object="${removedUser}" method="POST" action="" th:each="user : ${userList}">
 				<table>
-					<tr>
-						<td th:text="${user.name}">Username</td>
-						<td><textarea th:text="${user.name}" hidden="true"
-								th:field="*{name}"></textarea></td>
-						<td th:text="${user.email}">Email</td>
-						<td th:text="${user.role}">Role</td>
-						<td th:text="${user.superior}">Superior</td>
-						<td><textarea th:text="${user.id}" hidden="true"
-								th:field="*{id}"></textarea>id</td>
-						<td><button type="submit">Remove</button></td>
+					<tr class="row" >
+						<td class="col-sm-1"></td>
+						<td class="col-sm-2" th:text="${user.name}">Username</td>
+						<td hidden="true"><textarea th:text="${user.name}"
+								hidden="true" th:field="*{name}"></textarea></td>
+						<td class="col-sm-3" th:text="${user.email}">Email</td>
+						<td class="col-sm-2" th:text="${user.role}">Role</td>
+						<td class="col-sm-2" th:text="${user.superior}">Superior</td>
+						<td hidden="true"><textarea th:text="${user.id}"
+								hidden="true" th:field="*{id}"></textarea>id</td>
+						<td class="col-sm-1"><button class="subbutton red"
+								type="submit">Remove</button></td>
+						<td class="col-sm-1"></td>
 					</tr>
 				</table>
 			</form>

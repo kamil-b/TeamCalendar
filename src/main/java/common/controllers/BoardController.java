@@ -24,7 +24,11 @@ import common.repository.EventRepository;
 import common.service.BoardService;
 
 @Controller
+@RequestMapping(value = "/board")
 public class BoardController {
+
+	private static final int DEFAULT_NUMBER_OF_DAYS = 5;
+	private static final int EXTENDED_NUMBER_OF_DAYS = 10;
 
 	@Autowired
 	BoardService boardService;
@@ -37,15 +41,26 @@ public class BoardController {
 	String boardName;
 	Board board;
 
-	@RequestMapping(value = "/board/{boardname}", method = RequestMethod.GET)
-	public String getBoard(@PathVariable("boardname") String boardname, Model model, Principal principal) {
+	@RequestMapping(value = "/{boardname}", method = RequestMethod.GET)
+	public String getBoardByDefault(@PathVariable("boardname") String boardname, Model model, Principal principal) {
+		return getBoard(boardname, DEFAULT_NUMBER_OF_DAYS, model, principal);
+	}
 
-		// week = new ArrayList<LocalDate>(CalenderHelper.returnCurrentWeek());
-		week = new ArrayList<LocalDate>(CalenderHelper.returnNextFiveDays());
-		
+	@RequestMapping(value = "/{boardname}/{days}", method = RequestMethod.GET)
+	public String getBoard(@PathVariable("boardname") String boardname, @PathVariable("days") int days, Model model,
+			Principal principal) {
+		DateTimeFormatter formatter;
+		int nextDays = DEFAULT_NUMBER_OF_DAYS;
+
+		if (days == EXTENDED_NUMBER_OF_DAYS) {
+			nextDays = EXTENDED_NUMBER_OF_DAYS;
+			formatter = DateTimeFormat.forPattern("EE dd.MM");
+		} else {
+			formatter = DateTimeFormat.forPattern("EEEE dd.MM");
+		}
+		week = new ArrayList<LocalDate>(CalenderHelper.returnNextFiveDays(nextDays));
 		eventsInThisWeek = new ArrayList<Event>();
 		List<String> weekDays = new ArrayList<String>();
-		DateTimeFormatter formatter = DateTimeFormat.forPattern("EEEE dd.MM");
 
 		for (LocalDate day : week) {
 			weekDays.add(formatter.print(day));
@@ -57,7 +72,11 @@ public class BoardController {
 		model.addAttribute("events", events);
 		model.addAttribute("name", principal.getName());
 
-		return "board";
+		if (days == EXTENDED_NUMBER_OF_DAYS) {
+			return "board10";
+		} else {
+			return "board";
+		}
 
 	}
 }

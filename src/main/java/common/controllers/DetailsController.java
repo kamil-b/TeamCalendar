@@ -23,7 +23,7 @@ public class DetailsController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private BoardService boardService;
 
@@ -48,7 +48,7 @@ public class DetailsController {
 	@RequestMapping(value = "/user/{username}/details", method = RequestMethod.POST)
 	public String assigneToBoard(@PathVariable("username") String username,
 			@ModelAttribute(value = "selectedboard") Board selectedboard, Model model) {
-		
+
 		User user = userService.findByName(username);
 		Board board = boardService.findByName(selectedboard.getName());
 
@@ -58,11 +58,7 @@ public class DetailsController {
 		if (board == null) {
 			throw new IllegalArgumentException("Couldnt find board in database");
 		}
-		System.out.println(user.getName());
-		for(User u: board.getMembers())
-		System.out.println("member: " + u.getName());
-		
-		
+
 		if (board.getMembers().contains(user)) {
 			board.removeUserFromBoard(user);
 			user.removeBoardFromList(board);

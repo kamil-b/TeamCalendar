@@ -8,71 +8,74 @@
 <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
 <link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
 <link rel="stylesheet" type="text/css" href="/css/home.css" />
-<title>Spring Security Example</title>
+<title>Team Calendar</title>
 </head>
 <body>
-<div>
-	<div class="jumbotron">
-		<div class="container">
-			<div th:if="${logged} == false">
-				<h1>Welcome!</h1>
-			</div>
-			<div th:unless="${logged} == false">
-				<h1 th:text="'Welcome, ' + ${name}">Welcome!</h1>
+	<div>
+		<div class="jumbotron">
+			<div class="container">
+				<div th:if="${logged} == false">
+					<h1>Welcome!</h1>
+				</div>
+				<div th:unless="${logged} == false">
+					<h1 th:text="'Welcome, ' + ${name}">Welcome!</h1>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div th:if="${logged} == false">
-		<div th:replace="fragments/navbar :: header">...</div>
-	</div>
-	<div th:unless="${logged} == false">
-		<div th:replace="fragments/navbar :: header_logged">...</div>
-	</div>
-	<div class="container" id="headertitle">
 		<div th:if="${logged} == false">
-			<h3>
-				Hello, please <a th:href="@{/login}">log in</a> to see content or <a
-					th:href="@{/user/registration}">register</a> if you don`t have
-				account.
-			</h3>
+			<div th:replace="fragments/navbar :: header">...</div>
 		</div>
 		<div th:unless="${logged} == false">
-			<div class="actions ">
-				<div class="row">
-					<form method="GET" th:action="@{'/user/' + ${name} + '/events'}">
-						<button type="submit" class=" subbutton blue">ADD EVENTS</button>
-					</form>
-				</div>
-				<div class="row">
-					<form method="GET" th:action="@{'/user/' + ${name} + '/details'}">
-						<button type="submit" class=" subbutton blue">ACCOUNT
-							DETAILS</button>
-					</form>
-				</div>
-				<div class="row">
-					<form method="GET" th:action="@{'/board/addboard'}">
-						<button type="submit" class=" subbutton blue">CREATE
-							BOARD</button>
-					</form>
-				</div>
-				<div class="row" th:if="${isAdmin} == true">
-					<form method="GET" th:action="@{'/adminpanel'}">
-						<button type="submit" class=" subbutton green">ADMIN PANEL</button>
-					</form>
-				</div>
+			<div th:replace="fragments/navbar :: header_logged">...</div>
+		</div>
+		<div class="container" id="headertitle">
+			<div th:if="${logged} == false">
+				<br></br> <br></br>
+				<h3>
+					Hello, please <a th:href="@{/login}">log in</a> to see content or <a
+						th:href="@{/user/registration}">register</a> if you don`t have
+					account.
+				</h3>
+				<!-- <div class="container" th:replace="fragments/carousel :: carousel">...</div> -->
 			</div>
-			<div class="boardframe">
-				<h1>Boards:</h1>
-				<div th:each="board : ${boards}">
-					<form class="col-sm-3" method="GET"
-						th:action="@{'/board/' + ${board.name}}">
-						<button type="submit" class=" subbutton green"
-							th:text="${board.name}"></button>
-					</form>
+			<div th:unless="${logged} == false">
+				<div class="actions ">
+					<div class="row">
+						<form method="GET" th:action="@{'/user/' + ${name} + '/events'}">
+							<button type="submit" class=" subbutton blue">ADD EVENTS</button>
+						</form>
+					</div>
+					<div class="row">
+						<form method="GET" th:action="@{'/user/' + ${name} + '/details'}">
+							<button type="submit" class=" subbutton blue">ACCOUNT
+								DETAILS</button>
+						</form>
+					</div>
+					<div class="row">
+						<form method="GET" th:action="@{'/board/addboard'}">
+							<button type="submit" class=" subbutton blue">CREATE
+								BOARD</button>
+						</form>
+					</div>
+					<div class="row" th:if="${isAdmin} == true">
+						<form method="GET" th:action="@{'/adminpanel'}">
+							<button type="submit" class=" subbutton green">ADMIN
+								PANEL</button>
+						</form>
+					</div>
+				</div>
+				<div class="boardframe">
+					<h1>Boards:</h1>
+					<div th:each="board : ${boards}">
+						<form class="col-sm-3" method="GET"
+							th:action="@{'/board/' + ${board.name}}">
+							<button type="submit" class=" subbutton green"
+								th:text="${board.name}"></button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

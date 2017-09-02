@@ -25,6 +25,10 @@
 				<div class="inputcontainer">
 					<p class="row" th:each="error : ${#fields.errors('name')}"
 						th:text="${error}">Validation error</p>
+					<div>
+						<p style="color: red; font-size: 20px;" th:text="${reason}">error
+							reason</p>
+					</div>
 					<input type="text" autocomplete="off" value=" "
 						placeholder="username" th:field="*{name}" />
 				</div>

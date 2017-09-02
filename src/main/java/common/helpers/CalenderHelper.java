@@ -9,7 +9,7 @@ import org.joda.time.LocalDate;
 
 public class CalenderHelper {
 
-	private static final int NUMBER_OF_DAYS_FORWARD = 5;
+	private static final int NUMBER_OF_DAYS_IN_WEEK = 5;
 
 	/**
 	 * Returns List containing days of the actual week.
@@ -20,8 +20,8 @@ public class CalenderHelper {
 		List<LocalDate> currentWeek = new ArrayList<LocalDate>();
 
 		LocalDate now = new LocalDate();
-		LocalDate[] week = new LocalDate[NUMBER_OF_DAYS_FORWARD];
-		for (int i = 0; i < NUMBER_OF_DAYS_FORWARD; i++) {
+		LocalDate[] week = new LocalDate[NUMBER_OF_DAYS_IN_WEEK];
+		for (int i = 0; i < NUMBER_OF_DAYS_IN_WEEK; i++) {
 			week[i] = now.withDayOfWeek(DateTimeConstants.MONDAY + i);
 		}
 		currentWeek.addAll(Arrays.asList(week));
@@ -35,18 +35,18 @@ public class CalenderHelper {
 	 * 
 	 * @return nexFiveDays
 	 */
-	public static List<LocalDate> returnNextFiveDays() {
-		List<LocalDate> nexFiveDays = new ArrayList<LocalDate>();
+	public static List<LocalDate> returnNextFiveDays(int days) {
+		List<LocalDate> allDays = new ArrayList<LocalDate>();
 		LocalDate now = new LocalDate();
 		int i = 0;
-		while (nexFiveDays.size() < NUMBER_OF_DAYS_FORWARD) {
-			if (now.plusDays(i).getDayOfWeek() <= 5) {
-				nexFiveDays.add(now.plusDays(i));
+		while (allDays.size() < days) {
+			if (now.plusDays(i).getDayOfWeek() <= days) {
+				allDays.add(now.plusDays(i));
 
 			}
 			i++;
 		}
-		return nexFiveDays;
+		return allDays;
 
 	}
 }

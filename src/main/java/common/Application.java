@@ -14,6 +14,7 @@ import common.repository.BoardRepository;
 import common.repository.EventRepository;
 import common.repository.TipRepository;
 import common.repository.UserRepository;
+import common.service.UserService;
 
 @SpringBootApplication
 public class Application {
@@ -24,14 +25,14 @@ public class Application {
 	}
 
 	@Bean
-	public CommandLineRunner createUserWithAdminRights(UserRepository repository) {
+	public CommandLineRunner createUserWithAdminRights(UserService service) {
 		return (args) -> {
 			
 				User kamil = new User(1l, "kamil", "123");
 				kamil.setUserRole(UserRole.ADMIN);
 				kamil.setRole(JobRole.DEVELOPER);
 				kamil.setEmail("kamil.bednarczyk@ericsson.com");
-				repository.save(kamil);
+				service.createUserAccount(service.returnUserDto(kamil), null);
 		
 		};
 	}
