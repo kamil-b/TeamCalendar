@@ -6,6 +6,8 @@ import java.util.Arrays;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -60,6 +62,8 @@ public class RegistrationController {
 			return new ModelAndView("registration", "user", userDto).addObject("allRoles",
 					Arrays.asList(JobRole.values()));
 		} else {
+			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDto.getName(), userDto.getPassword(), null);
+			SecurityContextHolder.getContext().setAuthentication(auth);
 			return new ModelAndView("successRegister", "user", userDto);
 
 		}
