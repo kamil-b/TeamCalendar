@@ -62,7 +62,8 @@ public class RegistrationController {
 			return new ModelAndView("registration", "user", userDto).addObject("allRoles",
 					Arrays.asList(JobRole.values()));
 		} else {
-			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDto.getName(), userDto.getPassword(), null);
+			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDto.getName(),
+					userDto.getPassword(), null);
 			SecurityContextHolder.getContext().setAuthentication(auth);
 			return new ModelAndView("successRegister", "user", userDto);
 
