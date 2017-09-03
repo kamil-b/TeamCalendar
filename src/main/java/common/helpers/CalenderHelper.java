@@ -35,14 +35,14 @@ public class CalenderHelper {
 	 * 
 	 * @return nexFiveDays
 	 */
-	public static List<LocalDate> returnNextFiveDays(int days) {
+	public static List<LocalDate> returnNextDays(int days) {
 		List<LocalDate> allDays = new ArrayList<LocalDate>();
 		LocalDate now = new LocalDate();
 		int i = 0;
 		while (allDays.size() < days) {
-			if (now.plusDays(i).getDayOfWeek() <= days) {
+			int day = now.plusDays(i).getDayOfWeek();
+			if (day != 6 && day != 7) {
 				allDays.add(now.plusDays(i));
-
 			}
 			i++;
 		}

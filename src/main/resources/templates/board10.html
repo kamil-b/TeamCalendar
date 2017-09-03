@@ -33,7 +33,7 @@
 						<p th:text="${user.name}">username</p>
 					</div>
 				</div>
-				<div class="col-sm-1 event" th:each="day : ${events.week} "
+				<div class="col-sm-1 event" th:each="day : ${events.week}"
 					th:classappend="${events.isEventToday(day) ? 'today' : 'test'}">
 					<div th:each="event : ${events.getEventsBySpecificDate(day)}">
 						<label th:if="${event.username == user.name}"
@@ -47,6 +47,8 @@
 	<div class="container">
 		<p>
 			<a th:href="@{'/home'}">Go Home</a>
+			<br></br>
+			<a th:href="@{'/board/'+${boardname}}">5 days version</a>
 		</p>
 	</div>
 </body>

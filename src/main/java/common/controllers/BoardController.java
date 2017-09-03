@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import common.entities.Board;
-import common.entities.BoardWeeklyEvents;
+import common.entities.BoardEvents;
 import common.entities.Event;
 
 import common.helpers.CalenderHelper;
@@ -36,7 +36,7 @@ public class BoardController {
 	@Autowired
 	EventRepository eventRepository;
 
-	List<LocalDate> week;
+	List<LocalDate> daysList;
 	List<Event> eventsInThisWeek;
 	String boardName;
 	Board board;
@@ -58,19 +58,19 @@ public class BoardController {
 		} else {
 			formatter = DateTimeFormat.forPattern("EEEE dd.MM");
 		}
-		week = new ArrayList<LocalDate>(CalenderHelper.returnNextFiveDays(nextDays));
+		daysList = new ArrayList<LocalDate>(CalenderHelper.returnNextDays(nextDays));
 		eventsInThisWeek = new ArrayList<Event>();
 		List<String> weekDays = new ArrayList<String>();
 
-		for (LocalDate day : week) {
+		for (LocalDate day : daysList) {
 			weekDays.add(formatter.print(day));
 			eventsInThisWeek.addAll(eventRepository.findByDate(day));
 		}
-		BoardWeeklyEvents events = new BoardWeeklyEvents(boardService.findByName(boardname), eventsInThisWeek, week);
-
+		BoardEvents events = new BoardEvents(boardService.findByName(boardname), eventsInThisWeek, daysList);
 		model.addAttribute("week", weekDays);
 		model.addAttribute("events", events);
 		model.addAttribute("name", principal.getName());
+		model.addAttribute("boardname", boardname);
 
 		if (days == EXTENDED_NUMBER_OF_DAYS) {
 			return "board10";

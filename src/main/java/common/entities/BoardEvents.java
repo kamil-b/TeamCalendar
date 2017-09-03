@@ -9,7 +9,7 @@ import org.joda.time.LocalDate;
 
 import common.entities.enums.EventType;
 
-public class BoardWeeklyEvents {
+public class BoardEvents {
 
 	private Map<LocalDate, List<Event>> eventsByDay;
 	private List<Event> eventsInThisWeek = new ArrayList<Event>();
@@ -17,7 +17,7 @@ public class BoardWeeklyEvents {
 	private List<LocalDate> week;
 	private EventType NO_EVENT = EventType.NO_EVENT;
 
-	public BoardWeeklyEvents(Board board, List<Event> eventsInThisWeek, List<LocalDate> week) {
+	public BoardEvents(Board board, List<Event> eventsInThisWeek, List<LocalDate> week) {
 		this.board = board;
 		this.eventsInThisWeek = eventsInThisWeek;
 		this.week = week;
@@ -29,7 +29,7 @@ public class BoardWeeklyEvents {
 		for (LocalDate day : week) {
 			ArrayList<Event> eventsInSpecificDay = new ArrayList<Event>();
 			for (Event event : eventsInThisWeek) {
-				if (event.getDate().getDayOfWeek() == day.getDayOfWeek()) {
+				if (event.getDate().getDayOfYear() == day.getDayOfYear()) {
 					eventsInSpecificDay.add(event);
 				}
 			}
