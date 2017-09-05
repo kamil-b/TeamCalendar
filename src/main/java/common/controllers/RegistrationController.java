@@ -30,7 +30,7 @@ public class RegistrationController {
 	UserService userService;
 
 	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
-	public String showRegistrationForm(WebRequest request, Model model, Principal principal) {
+	public String showRegistrationForm(Model model, Principal principal) {
 		UserDto userDto = new UserDto();
 		boolean logged = false;
 		if (principal != null && principal.getName() != null) {
@@ -46,28 +46,22 @@ public class RegistrationController {
 	// http://www.baeldung.com/registration-with-spring-mvc-and-spring-security
 	@RequestMapping(value = "/user/registration", method = RequestMethod.POST)
 	public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto userDto, BindingResult result,
-			RedirectAttributes redirectAttributes, Errors errors) {
-
+			Errors errors) {
 		if (!result.hasErrors()) {
 			if (userService.userExists(userDto.getName())) {
 				return new ModelAndView("registration", "user", userDto)
 						.addObject("allRoles", Arrays.asList(JobRole.values()))
 						.addObject("reason", "Username " + userDto.getName() + " allready exists!");
-			} else {
-				userService.createUserAccount(userDto, result);
 			}
-		}
-
-		if (result.hasErrors()) {
-			return new ModelAndView("registration", "user", userDto).addObject("allRoles",
-					Arrays.asList(JobRole.values()));
-		} else {
+			userService.createUserAccount(userDto, result);
 			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDto.getName(),
 					userDto.getPassword(), null);
 			SecurityContextHolder.getContext().setAuthentication(auth);
 			return new ModelAndView("successRegister", "user", userDto);
-
 		}
+
+		return new ModelAndView("registration", "user", userDto).addObject("allRoles", Arrays.asList(JobRole.values()));
+
 	}
 
 }
