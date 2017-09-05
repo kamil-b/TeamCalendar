@@ -32,9 +32,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#jc-logout
 		http.logout().logoutSuccessUrl("/home");
-		//h2 security
-		http.authorizeRequests().antMatchers("/").permitAll().and().authorizeRequests()
-				.antMatchers("/console/**").permitAll();
+		// h2 security
+		
+		  http.authorizeRequests().antMatchers("/").permitAll().and().
+		  authorizeRequests() .antMatchers("/console/**").permitAll();
+		 
 
 		http.csrf().disable();
 		http.headers().frameOptions().disable();

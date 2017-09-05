@@ -30,7 +30,7 @@ import common.service.UserService;
 @Controller
 public class AddEventsController {
 
-	private static final int TIMEOUT = 5000;
+	private static final int TIMEOUT_MILISECONDS = 5000;
 	private EventDtoListForm eventForm;
 
 	@Autowired
@@ -100,9 +100,9 @@ public class AddEventsController {
 		props.put("mail.smtp.starttls.enable", true);
 		props.put("mail.smtp.ssl.enable", true);
 		props.put("mail.debug", true);
-		props.put("mail.smtp.connectiontimeout", TIMEOUT);
-		props.put("mail.smtp.timeout", TIMEOUT);
-		props.put("mail.smtp.writetimeout", TIMEOUT);
+		props.put("mail.smtp.connectiontimeout", TIMEOUT_MILISECONDS);
+		props.put("mail.smtp.timeout", TIMEOUT_MILISECONDS);
+		props.put("mail.smtp.writetimeout", TIMEOUT_MILISECONDS);
 
 		return mailSender;
 	}
