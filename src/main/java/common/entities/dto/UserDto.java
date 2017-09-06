@@ -2,8 +2,6 @@ package common.entities.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
@@ -21,7 +19,6 @@ public class UserDto {
 
 	@NotNull
 	@NotEmpty
-	@Column(unique = true)
 	private String name;
 	@NotNull
 	@NotEmpty

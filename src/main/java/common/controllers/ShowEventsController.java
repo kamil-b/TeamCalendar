@@ -23,7 +23,7 @@ import common.entities.Event;
 import common.entities.dto.EventDto;
 import common.entities.enums.EventType;
 import common.entities.wraper.EventDtoListForm;
-import common.service.EventService;
+import common.repository.EventService;
 
 @Controller
 public class ShowEventsController {

@@ -1,4 +1,4 @@
-package common.service;
+package common.repository;
 
 import java.security.Principal;
 

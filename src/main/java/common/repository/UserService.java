@@ -1,4 +1,4 @@
-package common.service;
+package common.repository;
 
 import java.util.List;
 
@@ -12,11 +12,13 @@ import org.springframework.validation.BindingResult;
 import common.entities.User;
 import common.entities.dto.UserDto;
 import common.entities.enums.JobRole;
-import common.repository.UserRepository;
+import org.apache.log4j.Logger;
 
 @Service
 public class UserService implements UserDetailsService {
 
+	final static Logger logger = Logger.getLogger(UserService.class);
+	
 	@Autowired
 	private UserRepository repository;
 
@@ -56,7 +58,8 @@ public class UserService implements UserDetailsService {
 	public User createUserAccount(UserDto userDto, BindingResult result) {
 
 		if (userExists(userDto.getName())) {
-			throw new IllegalArgumentException("Username allready exists in base");
+			logger.error("User: " + userDto.getName() + " with email: " + userDto.getEmail() + " already exists in database!!");
+		return null;
 		}
 
 		User registered = new User();
@@ -67,8 +70,8 @@ public class UserService implements UserDetailsService {
 		registered.setRole(userDto.getRole());
 		registered.setSuperior(userDto.getSuperior());
 		registered.setUserRole(userDto.getUserRole());
-		repository.save(registered);
-		return registered;
+		logger.debug("New user: " + userDto.getName() + " has been created in database.");
+		return repository.save(registered);
 	}
 
 	public UserDto returnUserDto(User user) {

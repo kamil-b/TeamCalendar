@@ -1,4 +1,4 @@
-package common.service;
+package common.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import common.entities.Board;
 import common.entities.User;
 import common.entities.dto.BoardDto;
-import common.repository.BoardRepository;
 
 @Service
 public class BoardService {

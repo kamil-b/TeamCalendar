@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import common.entities.User;
-import common.service.UserService;
+import common.repository.UserService;
 
 @Component
 public class LoginAuthenticationProvider implements AuthenticationProvider{

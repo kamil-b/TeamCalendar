@@ -18,8 +18,8 @@ import common.entities.dto.EventDto;
 import common.entities.enums.EventStatus;
 import common.entities.enums.JobRole;
 import common.entities.wraper.EventDtoListForm;
-import common.service.EventService;
-import common.service.UserService;
+import common.repository.EventService;
+import common.repository.UserService;
 
 @Controller
 public class EventsStatusController {

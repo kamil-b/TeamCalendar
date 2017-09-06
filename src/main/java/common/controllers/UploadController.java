@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import common.entities.User;
-import common.service.UserService;
+import common.repository.UserService;
 
 @Controller
 public class UploadController {

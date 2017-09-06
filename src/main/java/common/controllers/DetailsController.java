@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import common.entities.Board;
 import common.entities.User;
-import common.service.BoardService;
-import common.service.UserService;
+import common.repository.BoardService;
+import common.repository.UserService;
 
 @Controller
 public class DetailsController {

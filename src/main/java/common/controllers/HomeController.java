@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import common.entities.enums.UserRole;
-import common.service.BoardService;
-import common.service.SecurityService;
-import common.service.UserService;
+import common.repository.BoardService;
+import common.repository.SecurityService;
+import common.repository.UserService;
 
 @Controller
 public class HomeController {

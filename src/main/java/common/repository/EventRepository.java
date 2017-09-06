@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import common.entities.Event;
 
 
-public interface EventRepository extends CrudRepository<Event, Long>{
+interface EventRepository extends CrudRepository<Event, Long>{
 
 	List<Event> findByDate(LocalDate dates);
 	

@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import common.entities.dto.UserDto;
 import common.entities.enums.JobRole;
-
-import common.service.UserService;
+import common.repository.UserService;
 
 @Controller
 public class RegistrationController {

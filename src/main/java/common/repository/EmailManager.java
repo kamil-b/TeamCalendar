@@ -1,4 +1,4 @@
-package common.service;
+package common.repository;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

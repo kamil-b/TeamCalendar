@@ -1,4 +1,4 @@
-package common.service;
+package common.repository;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -14,7 +14,6 @@ import common.entities.Event;
 import common.entities.User;
 import common.entities.dto.EventDto;
 import common.entities.enums.EventType;
-import common.repository.EventRepository;
 
 @Service
 public class EventService {
@@ -28,6 +27,10 @@ public class EventService {
 	public EventService() {
 	}
 
+	public List<Event> findByDate(LocalDate date){
+		return eventRepository.findByDate(date);
+	}
+	
 	public List<Event> getAllEventsForUser(User user) {
 		return getAllEventsForUser(user.getUsername());
 	}

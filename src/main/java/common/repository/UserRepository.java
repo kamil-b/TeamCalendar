@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import common.entities.User;
 import common.entities.enums.JobRole;
 
-public interface UserRepository extends CrudRepository<User, Long>{
+interface UserRepository extends CrudRepository<User, Long>{
 
 	User findByName(String name);
 

@@ -1,11 +1,10 @@
-package common.service;
+package common.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import common.entities.Tip;
 import common.entities.dto.TipDto;
-import common.repository.TipRepository;
 
 @Service
 public class TipService {

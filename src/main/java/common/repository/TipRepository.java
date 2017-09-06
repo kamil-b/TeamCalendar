@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import common.entities.Tip;
 
-public interface TipRepository extends CrudRepository<Tip, Long>{
+interface TipRepository extends CrudRepository<Tip, Long>{
 	
 	List<Tip> findBySection(String section);
 

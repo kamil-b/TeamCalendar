@@ -4,17 +4,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import common.entities.Board;
-import common.entities.Tip;
 import common.entities.User;
-import common.entities.enums.EventType;
 import common.entities.enums.JobRole;
 import common.entities.enums.UserRole;
-import common.repository.BoardRepository;
-import common.repository.EventRepository;
-import common.repository.TipRepository;
-import common.repository.UserRepository;
-import common.service.UserService;
+import common.repository.UserService;
 
 @SpringBootApplication
 public class Application {

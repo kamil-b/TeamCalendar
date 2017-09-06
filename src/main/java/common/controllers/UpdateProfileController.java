@@ -17,8 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import common.entities.User;
 import common.entities.dto.UserDto;
 import common.entities.enums.JobRole;
-
-import common.service.UserService;
+import common.repository.UserService;
 
 @Controller
 public class UpdateProfileController {

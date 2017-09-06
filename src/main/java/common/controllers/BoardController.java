@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import common.entities.Board;
 import common.entities.BoardEvents;
 import common.entities.Event;
-
 import common.helpers.CalenderHelper;
-
-import common.repository.EventRepository;
-import common.service.BoardService;
+import common.repository.BoardService;
+import common.repository.EventService;
 
 @Controller
 @RequestMapping(value = "/board")
@@ -34,7 +32,7 @@ public class BoardController {
 	BoardService boardService;
 
 	@Autowired
-	EventRepository eventRepository;
+	EventService eventService;
 
 	List<LocalDate> daysList;
 	List<Event> eventsInThisWeek;
@@ -64,7 +62,7 @@ public class BoardController {
 
 		for (LocalDate day : daysList) {
 			weekDays.add(formatter.print(day));
-			eventsInThisWeek.addAll(eventRepository.findByDate(day));
+			eventsInThisWeek.addAll(eventService.findByDate(day));
 		}
 		BoardEvents events = new BoardEvents(boardService.findByName(boardname), eventsInThisWeek, daysList);
 		model.addAttribute("week", weekDays);

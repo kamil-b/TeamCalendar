@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import common.entities.Tip;
 import common.entities.dto.TipDto;
-import common.service.TipService;
+import common.repository.TipService;
 
 @Controller
 public class TipsController {

@@ -89,8 +89,14 @@ public class RegistrationTest {
 
 	@Test(dependsOnMethods = { "addEventsWithoutSendingEmailToSuperior" })
 	public void logout() {
+		driver.get("http://www.localhost:8080/console");
+		driver.findElement(By.cssSelector("tr.login > td.login > input.button")).click();
+		driver.findElement(By.name("sql")).sendKeys("delete user where name=" + user.getName());
+		driver.findElement(By.cssSelector("body > form > input.button")).click();
 		driver.findElement(By.linkText("Logout")).click();
 		assertTrue(isElementPresent(By.linkText("Login")));
+		
+		
 	}
 
 	@AfterClass(alwaysRun = true)

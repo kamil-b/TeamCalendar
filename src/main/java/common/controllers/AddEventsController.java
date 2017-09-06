@@ -23,9 +23,9 @@ import common.entities.User;
 import common.entities.dto.EventDto;
 import common.entities.wraper.EventDtoListForm;
 import common.entities.wraper.MailContentWrapper;
-import common.service.EmailManager;
-import common.service.EventService;
-import common.service.UserService;
+import common.repository.EmailManager;
+import common.repository.EventService;
+import common.repository.UserService;
 
 @Controller
 public class AddEventsController {
