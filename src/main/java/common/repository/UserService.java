@@ -12,13 +12,15 @@ import org.springframework.validation.BindingResult;
 import common.entities.User;
 import common.entities.dto.UserDto;
 import common.entities.enums.JobRole;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class UserService implements UserDetailsService {
 
-	final static Logger logger = Logger.getLogger(UserService.class);
-	
+	private final static Logger logger = LoggerFactory.getLogger(UserService.class);
+
 	@Autowired
 	private UserRepository repository;
 
@@ -35,6 +37,7 @@ public class UserService implements UserDetailsService {
 	}
 
 	public void deleteUser(User user) {
+		logger.debug("User: " + user.getName() + " email:" + user.getEmail() + " has been delated from database");
 		repository.delete(user);
 	}
 
@@ -46,7 +49,7 @@ public class UserService implements UserDetailsService {
 		return repository.findAll();
 	}
 
-	public void save(User registered) {
+	public void update(User registered) {
 		repository.save(registered);
 	}
 
@@ -55,11 +58,12 @@ public class UserService implements UserDetailsService {
 		return repository.findByName(name);
 	}
 
-	public User createUserAccount(UserDto userDto, BindingResult result) {
+	public User createUserAccount(UserDto userDto) {
 
 		if (userExists(userDto.getName())) {
-			logger.error("User: " + userDto.getName() + " with email: " + userDto.getEmail() + " already exists in database!!");
-		return null;
+			logger.error("User: " + userDto.getName() + " with email: " + userDto.getEmail()
+					+ " already exists in database!!");
+			return null;
 		}
 
 		User registered = new User();
@@ -70,7 +74,7 @@ public class UserService implements UserDetailsService {
 		registered.setRole(userDto.getRole());
 		registered.setSuperior(userDto.getSuperior());
 		registered.setUserRole(userDto.getUserRole());
-		logger.debug("New user: " + userDto.getName() + " has been created in database.");
+		logger.info("New user: " + userDto.getName() + " has been created in database.");
 		return repository.save(registered);
 	}
 

@@ -18,5 +18,7 @@ interface EventRepository extends CrudRepository<Event, Long>{
 	
 	Event findById(Long id);
 	
+	void deleteByDate(List<LocalDate> dates);
 	
+	void deleteByDate(LocalDate date);
 }

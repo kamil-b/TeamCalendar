@@ -45,10 +45,9 @@ public class AddBoardController {
 		Board createdBoard;
 		if (!bindingResult.hasErrors()) {
 			createdBoard = boardService.createBoard(boardDto);
-			boardService.save(createdBoard);
 			User user = userService.findByName(createdBoard.getOwner());
 			user.addBoardToList(createdBoard);
-			userService.save(user);
+			userService.update(user);
 
 		}
 		if (bindingResult.hasErrors()) {

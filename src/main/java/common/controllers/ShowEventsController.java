@@ -34,20 +34,16 @@ public class ShowEventsController {
 	private EventDtoListForm eventForm;
 	private List<EventType> eventtypes = Arrays.asList(EventType.values());
 
-	public ShowEventsController() {
-	}
-
 	@RequestMapping(value = "/user/{name}/events", method = RequestMethod.GET)
 	public ModelAndView showCalender(@PathVariable("name") String name, Model model, Principal principal) {
 
-		
 		if (!name.equals(principal.getName())) {
 			return new ModelAndView("redirect:/home");
 		}
-		
+
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("EEEE\n dd.MM");
 		Map<LocalDate, Event> events = eventService.getAllEventsForUserForNext30Days(name);
-		 eventForm = new EventDtoListForm();
+		eventForm = new EventDtoListForm();
 		eventForm.setEventslist((ArrayList<EventDto>) eventService.returnListOfEventDto(events));
 
 		model.addAttribute("eventtypes", eventtypes);
@@ -55,7 +51,6 @@ public class ShowEventsController {
 		model.addAttribute("eventForm", eventForm);
 		model.addAttribute("formatter", formatter);
 		return new ModelAndView("events");
-
 	}
 
 	@RequestMapping(value = "/user/{name}/events", method = RequestMethod.POST)
@@ -63,21 +58,11 @@ public class ShowEventsController {
 			@ModelAttribute("eventFormWrapper") EventDtoListForm eventForm, RedirectAttributes redirectAttributes) {
 
 		EventDtoListForm changedEventForm = new EventDtoListForm();
-		changedEventForm.setEventslist(eventService.getChangedEventsDto(this.eventForm.getEventslist() , eventForm.getEventslist()));
-		
+		changedEventForm.setEventslist(
+				eventService.getChangedEventsDto(this.eventForm.getEventslist(), eventForm.getEventslist()));
+
 		redirectAttributes.addFlashAttribute("eventForm", changedEventForm);
 		return "redirect:addevents";
 
 	}
-	
-	/*@RequestMapping(value = "/user/{name}/events", method = RequestMethod.POST)
-	public ModelAndView updateCalender(@PathVariable("name") String name,
-			@ModelAttribute("eventFormWrapper") EventDtoListForm eventForm) {
-
-		for (EventDto eventDto : eventForm.getEventslist()) {
-			eventService.update(eventService.returnEvent(eventDto));
-		}
-		return new ModelAndView("redirect:/home");
-
-	}*/
 }

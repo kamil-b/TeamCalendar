@@ -6,12 +6,19 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+<link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
 <link rel="stylesheet" type="text/css" href="/css/teamboard.css" />
 <title>Team board</title>
 </head>
 <body>
 	<div class="teamnamecontainer" th:object="${events}">
 		<p th:text="${events.getBoardName()}"></p>
+	</div>
+	<div th:if="${logged} == false">
+		<div th:replace="fragments/navbar :: header">...</div>
+	</div>
+	<div th:unless="${logged} == false">
+		<div th:replace="fragments/navbar :: header_logged">...</div>
 	</div>
 	<div class=" boardcontainer">
 		<th:block th:object="${events}">
@@ -27,7 +34,8 @@
 			<div class="row" th:each="user : ${events.getBoardMembers()}">
 				<div class="col-sm-2 user-cell">
 					<div class="col-sm-6">
-						<img alt="user" th:src="@{'/'+${user.name}+'/avatar'}" />
+						<img height="120" width="120" alt="user"
+							th:src="@{'/avatar/'+${user.name}}" />
 					</div>
 					<div class="col-sm-6">
 						<p th:text="${user.name}">username</p>
@@ -46,8 +54,6 @@
 	</div>
 	<div class="container">
 		<p>
-			<a th:href="@{'/home'}">Go Home</a>
-			<br></br>
 			<a th:href="@{'/board/'+${boardname}}">5 days version</a>
 		</p>
 	</div>

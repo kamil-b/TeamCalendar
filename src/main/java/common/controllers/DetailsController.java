@@ -66,7 +66,7 @@ public class DetailsController {
 			board.addUserToBoard(user);
 			user.addBoardToList(board);
 		}
-		userService.save(user);
+		userService.update(user);
 		boardService.save(board);
 
 		List<Board> list = boardService.findAll();

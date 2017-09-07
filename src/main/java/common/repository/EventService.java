@@ -7,7 +7,10 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import org.joda.time.LocalDate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import common.entities.Event;
@@ -16,7 +19,10 @@ import common.entities.dto.EventDto;
 import common.entities.enums.EventType;
 
 @Service
+// @EnableScheduling
 public class EventService {
+
+	private final static Logger logger = LoggerFactory.getLogger(EventService.class);
 
 	@Autowired
 	private EventRepository eventRepository;
@@ -27,10 +33,10 @@ public class EventService {
 	public EventService() {
 	}
 
-	public List<Event> findByDate(LocalDate date){
+	public List<Event> findByDate(LocalDate date) {
 		return eventRepository.findByDate(date);
 	}
-	
+
 	public List<Event> getAllEventsForUser(User user) {
 		return getAllEventsForUser(user.getUsername());
 	}
@@ -92,10 +98,12 @@ public class EventService {
 	}
 
 	public void save(List<Event> events) {
+
 		eventRepository.save(events);
 	}
 
 	public void save(Event event) {
+		logger.info("Event: " + event.toString() + " added to database");
 		eventRepository.save(event);
 	}
 
@@ -122,14 +130,13 @@ public class EventService {
 			if (!changed.get(i).getEventType().equals(all.get(i).getEventType())) {
 				changedEvents.add(changed.get(i));
 			}
-
 		}
-
 		return changedEvents;
 	}
 
 	/**
 	 * Convert Event to EventDto
+	 * 
 	 * @param event
 	 * @return EventDto
 	 */
@@ -146,6 +153,7 @@ public class EventService {
 
 	/**
 	 * Convert EventDto to Event
+	 * 
 	 * @param eventDto
 	 * @return Event
 	 */
@@ -166,7 +174,7 @@ public class EventService {
 	/**
 	 * 
 	 * @param superior
-	 * @return list of events for users belonged to specific superior 
+	 * @return list of events for users belonged to specific superior
 	 */
 	public List<Event> getAllEventsBelongedToSuperior(String superior) {
 		List<User> users = userService.getAllUsersForSuperior(superior);
@@ -177,5 +185,11 @@ public class EventService {
 		}
 		return events;
 	}
-
+	/*
+	 * TODO: cleaning old events --> create different service for it
+	 * 
+	 * @Scheduled(cron="* * * * * *") private void cleanupOldEvents(){
+	 * logger.info("Starting cleaning process for old events");
+	 * System.out.println("test"); LocalDate now = new LocalDate(); }
+	 */
 }

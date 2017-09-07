@@ -56,7 +56,7 @@ public class UpdateProfileController {
 		user.setSuperior(updated.getSuperior());
 		user.setRemoteWorkLocation(updated.getRemoteWorkLocation());
 
-		userService.save(user);
+		userService.update(user);
 
 		redirectAttributes.addFlashAttribute("reason", "Profile updated succesfully !");
 		return "redirect:/user/{username}/details";

@@ -28,14 +28,9 @@ public class RegistrationController {
 
 	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
 	public String showRegistrationForm(Model model, Principal principal) {
-		UserDto userDto = new UserDto();
-		boolean logged = false;
-		if (principal != null && principal.getName() != null) {
-			logged = true;
-		}
 		model.addAttribute("allRoles", Arrays.asList(JobRole.values()));
-		model.addAttribute("logged", logged);
-		model.addAttribute("user", userDto);
+		model.addAttribute("logged", principal != null);
+		model.addAttribute("user", new UserDto());
 		return "registration";
 	}
 
@@ -50,7 +45,7 @@ public class RegistrationController {
 						.addObject("allRoles", Arrays.asList(JobRole.values()))
 						.addObject("reason", "Username " + userDto.getName() + " allready exists!");
 			}
-			userService.createUserAccount(userDto, result);
+			userService.createUserAccount(userDto);
 			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDto.getName(),
 					userDto.getPassword(), null);
 			SecurityContextHolder.getContext().setAuthentication(auth);

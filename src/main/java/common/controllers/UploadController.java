@@ -55,7 +55,7 @@ public class UploadController {
 
 			User user = userService.findByName(principal.getName());
 			user.setImage(bytes);
-			userService.save(user);
+			userService.update(user);
 
 			redirectAttributes.addFlashAttribute("message", "You successfully uploaded avatar icon");
 		} catch (IOException e) {
@@ -66,7 +66,7 @@ public class UploadController {
 
 	}
 
-	@RequestMapping(value = "/{username}/avatar", method = RequestMethod.GET)
+	@RequestMapping(value = "/avatar/{username}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getQRImage(@PathVariable("username") String username, Principal principal) {
 		System.out.println(username);
 		byte[] bytes = userService.findByName(username).getImage();

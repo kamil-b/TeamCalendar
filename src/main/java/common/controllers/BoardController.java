@@ -67,7 +67,10 @@ public class BoardController {
 		BoardEvents events = new BoardEvents(boardService.findByName(boardname), eventsInThisWeek, daysList);
 		model.addAttribute("week", weekDays);
 		model.addAttribute("events", events);
+		model.addAttribute("logged", principal != null);
+		if(principal != null){
 		model.addAttribute("name", principal.getName());
+		}
 		model.addAttribute("boardname", boardname);
 
 		if (days == EXTENDED_NUMBER_OF_DAYS) {

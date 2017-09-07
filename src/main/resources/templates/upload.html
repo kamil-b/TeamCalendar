@@ -20,7 +20,7 @@
 		<form method="POST" action="/upload" enctype="multipart/form-data">
 		
 			<div>
-				<img th:src="@{'/'+ ${username} +'/avatar'}" height="120" width="120" />
+				<img th:src="@{'/avatar/'+ ${username}}" height="120" width="120" />
 			</div>
 			<input type="file" name="file" /><br />
 			<br /> <input type="submit" value="submit" />

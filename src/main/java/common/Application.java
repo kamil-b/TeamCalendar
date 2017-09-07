@@ -25,7 +25,7 @@ public class Application {
 				kamil.setUserRole(UserRole.ADMIN);
 				kamil.setRole(JobRole.DEVELOPER);
 				kamil.setEmail("kamil.bednarczyk@ericsson.com");
-				service.createUserAccount(service.returnUserDto(kamil), null);
+				service.createUserAccount(service.returnUserDto(kamil));
 		
 		};
 	}

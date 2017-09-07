@@ -51,15 +51,12 @@ public class AddEventsController {
 			redirectAttributes.addFlashAttribute("reason", "You dont have permision to visit this site !!");
 			return "redirect:/error";
 		}
-
 		MailContentWrapper content = new MailContentWrapper();
 		model.addAttribute("content", content);
 		model.addAttribute("eventForm", eventForm);
 		this.eventForm = new EventDtoListForm();
 		this.eventForm.setEventslist((ArrayList<EventDto>) eventForm.getEventslist());
-
 		return "addevents";
-
 	}
 
 	@RequestMapping(value = "/user/{username}/addevents", method = RequestMethod.POST)

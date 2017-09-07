@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @Configuration
 @EnableWebSecurity
+//@EnableScheduling
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -26,17 +28,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// https://docs.spring.io/spring-security/site/docs/current/reference/html/csrf.html#csrf-configure
 		http.csrf().disable();// disable CSRF
 
-		http.authorizeRequests().antMatchers("/", "/home", "/user/registration", "/css/**", "/images/**").permitAll()
-				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
-				.permitAll();
+		http.authorizeRequests()
+				.antMatchers("/", "/home", "/user/registration", "/css/**", "/images/**", "/board/**", "/avatar/**")
+				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and()
+				.logout().permitAll();
 
 		// https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#jc-logout
 		http.logout().logoutSuccessUrl("/home");
 		// h2 security
-		
-		  http.authorizeRequests().antMatchers("/").permitAll().and().
-		  authorizeRequests() .antMatchers("/console/**").permitAll();
-		 
+
+		http.authorizeRequests().antMatchers("/").permitAll().and().authorizeRequests().antMatchers("/console/**")
+				.permitAll();
 
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
