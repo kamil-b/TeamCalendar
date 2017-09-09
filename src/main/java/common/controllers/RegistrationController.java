@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import common.entities.User;
 import common.entities.dto.UserDto;
 import common.entities.enums.JobRole;
 import common.repository.UserService;
@@ -45,9 +47,9 @@ public class RegistrationController {
 						.addObject("allRoles", Arrays.asList(JobRole.values()))
 						.addObject("reason", "Username " + userDto.getName() + " allready exists!");
 			}
-			userService.createUserAccount(userDto);
-			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDto.getName(),
-					userDto.getPassword(), null);
+			User user = userService.createUserAccount(userDto);
+			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user.getName(),
+					user.getPassword(), user.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(auth);
 			return new ModelAndView("successRegister", "user", userDto);
 		}

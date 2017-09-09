@@ -30,7 +30,7 @@ public class LoginAuthenticationProvider implements AuthenticationProvider{
 			throw new BadCredentialsException("wrong password");
 		}
 		
-		return new UsernamePasswordAuthenticationToken(user, password,  null);
+		return new UsernamePasswordAuthenticationToken(user, password,  user.getAuthorities());
 	}
 
 	@Override

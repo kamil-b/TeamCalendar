@@ -4,6 +4,8 @@ import java.security.Principal;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,8 @@ import common.repository.UserService;
 
 @Controller
 public class DetailsController {
+
+	private final static Logger logger = LoggerFactory.getLogger(AdministrationPageController.class);
 
 	@Autowired
 	private UserService userService;
@@ -52,11 +56,9 @@ public class DetailsController {
 		User user = userService.findByName(username);
 		Board board = boardService.findByName(selectedboard.getName());
 
-		if (user == null) {
-			throw new IllegalArgumentException("Couldnt find user in database");
-		}
-		if (board == null) {
-			throw new IllegalArgumentException("Couldnt find board in database");
+		if (user == null || board == null) {
+			logger.error("Could not find user or board in database");
+			return "redirect:home";
 		}
 
 		if (board.getMembers().contains(user)) {

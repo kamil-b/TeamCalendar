@@ -10,9 +10,7 @@ import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import common.entities.Event;
 import common.entities.User;
 import common.entities.dto.EventDto;
@@ -23,7 +21,6 @@ import common.entities.enums.EventType;
 public class EventService {
 
 	private final static Logger logger = LoggerFactory.getLogger(EventService.class);
-
 	@Autowired
 	private EventRepository eventRepository;
 
@@ -98,13 +95,18 @@ public class EventService {
 	}
 
 	public void save(List<Event> events) {
-
 		eventRepository.save(events);
+		logger.info("Multiple events added to database:");
+		for (Event ev : events) {
+			logger.info(ev.toString());
+		}
+
 	}
 
 	public void save(Event event) {
-		logger.info("Event: " + event.toString() + " added to database");
 		eventRepository.save(event);
+		logger.info("Event: " + event.toString() + " added to database");
+
 	}
 
 	/**

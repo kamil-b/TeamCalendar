@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
 	}
 
 	public void deleteUser(User user) {
-		logger.debug("User: " + user.getName() + " email:" + user.getEmail() + " has been delated from database");
+		logger.info("User: " + user.getName() + " email:" + user.getEmail() + " has been delated from database");
 		repository.delete(user);
 	}
 
