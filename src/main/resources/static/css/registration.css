@@ -66,11 +66,11 @@ label {
   vertical-align: middle;
   font-size: 24px; }
 
-/*html {
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-image: url("/images/backgrounds/sky.jpg");
-}*/
+html {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-image: url("/images/backgrounds/login.jpeg"); }
+
 option {
   padding: 10px;
   border: 0;

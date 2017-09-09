@@ -12,15 +12,6 @@
     margin: 5px;
 }
 
-.blue {
-    background-color: #6108FC;
-    /* background-color: #f44336;*/
-}
-
-.blue:hover {
-    background-color: #604a87;
-}
-
 .green {
     background-color: forestgreen;
 }
@@ -31,4 +22,21 @@
 
 #headertitle {
     background-color: transparent;
+}
+
+.blue:hover {
+    background-color: #3696f9;
+}
+
+.blue {
+    background-color: #003366;
+}
+
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
 }

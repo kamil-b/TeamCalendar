@@ -70,8 +70,7 @@ p {
 a {
   color: #f44336; }
 
-/*html {
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-image: url("/images/backgrounds/sky.jpg");
-}*/
+html {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-image: url("/images/backgrounds/login.jpeg"); }
