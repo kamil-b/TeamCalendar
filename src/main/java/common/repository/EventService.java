@@ -10,6 +10,8 @@ import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import common.entities.Event;
 import common.entities.User;
@@ -17,7 +19,7 @@ import common.entities.dto.EventDto;
 import common.entities.enums.EventType;
 
 @Service
-// @EnableScheduling
+
 public class EventService {
 
 	private final static Logger logger = LoggerFactory.getLogger(EventService.class);
@@ -187,11 +189,5 @@ public class EventService {
 		}
 		return events;
 	}
-	/*
-	 * TODO: cleaning old events --> create different service for it
-	 * 
-	 * @Scheduled(cron="* * * * * *") private void cleanupOldEvents(){
-	 * logger.info("Starting cleaning process for old events");
-	 * System.out.println("test"); LocalDate now = new LocalDate(); }
-	 */
+
 }
