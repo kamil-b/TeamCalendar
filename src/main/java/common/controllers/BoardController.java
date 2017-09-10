@@ -56,7 +56,7 @@ public class BoardController {
 		} else {
 			formatter = DateTimeFormat.forPattern("EEEE dd.MM");
 		}
-		daysList = new ArrayList<LocalDate>(CalenderHelper.returnNextDays(nextDays));
+		daysList = new ArrayList<LocalDate>(CalenderHelper.getNextDays(nextDays));
 		eventsInThisWeek = new ArrayList<Event>();
 		List<String> weekDays = new ArrayList<String>();
 
@@ -68,10 +68,11 @@ public class BoardController {
 		model.addAttribute("week", weekDays);
 		model.addAttribute("events", events);
 		model.addAttribute("logged", principal != null);
-		if(principal != null){
-		model.addAttribute("name", principal.getName());
+		if (principal != null) {
+			model.addAttribute("name", principal.getName());
 		}
 		model.addAttribute("boardname", boardname);
+		model.addAttribute("weekNumber", CalenderHelper.getCurrentWeekNumber());
 
 		if (days == EXTENDED_NUMBER_OF_DAYS) {
 			return "board10";

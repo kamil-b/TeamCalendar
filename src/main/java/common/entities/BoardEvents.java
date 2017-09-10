@@ -29,7 +29,7 @@ public class BoardEvents {
 		for (LocalDate day : week) {
 			ArrayList<Event> eventsInSpecificDay = new ArrayList<Event>();
 			for (Event event : eventsInThisWeek) {
-				if (event.getDate().getDayOfYear() == day.getDayOfYear()) {
+				if (event.getDate().getDayOfYear() == day.getDayOfYear() && (!event.getEventType().equals(EventType.NO_EVENT))) {
 					eventsInSpecificDay.add(event);
 				}
 			}

@@ -11,12 +11,19 @@ public class CalenderHelper {
 
 	private static final int NUMBER_OF_DAYS_IN_WEEK = 5;
 
+	
+	
+	public static int getCurrentWeekNumber(){
+		LocalDate today = new LocalDate();
+		return today.getWeekOfWeekyear();
+	}
+	
 	/**
 	 * Returns List containing days of the actual week.
 	 * 
 	 * @return currentWeek
 	 */
-	public static List<LocalDate> returnCurrentWeek() {
+	public static List<LocalDate> getCurrentWeekDays() {
 		List<LocalDate> currentWeek = new ArrayList<LocalDate>();
 
 		LocalDate now = new LocalDate();
@@ -31,11 +38,11 @@ public class CalenderHelper {
 	}
 
 	/**
-	 * Returns next five days from today. Skips weekend days.
+	 * Returns next N days starting from today. Skips weekend days.
 	 * 
-	 * @return nexFiveDays
+	 * @return next N days
 	 */
-	public static List<LocalDate> returnNextDays(int days) {
+	public static List<LocalDate> getNextDays(int days) {
 		List<LocalDate> allDays = new ArrayList<LocalDate>();
 		LocalDate now = new LocalDate();
 		int i = 0;

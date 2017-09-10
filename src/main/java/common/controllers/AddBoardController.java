@@ -41,7 +41,7 @@ public class AddBoardController {
 
 	@RequestMapping(value = "/board/addboard", method = RequestMethod.POST)
 	public ModelAndView addBoard(Model model, @ModelAttribute("board") @Valid BoardDto boardDto,
-			BindingResult bindingResult, Errors errors) {
+			BindingResult bindingResult) {
 		Board createdBoard;
 		if (!bindingResult.hasErrors()) {
 			createdBoard = boardService.createBoard(boardDto);

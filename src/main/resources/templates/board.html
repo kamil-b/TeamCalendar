@@ -11,8 +11,9 @@
 <title>Team board</title>
 </head>
 <body>
-	<div class="teamnamecontainer" th:object="${events}">
-		<p th:text="${events.getBoardName()}"></p>
+	<div class="teamnamecontainer row" th:object="${events}">
+		<p class="col-sm-10" th:text="${events.getBoardName()}"></p>
+		<p class="col-sm-2" th:text="'Week: ' + ${weekNumber}"></p>
 	</div>
 	<div th:if="${logged} == false">
 		<div th:replace="fragments/navbar :: header">...</div>
@@ -31,7 +32,7 @@
 					<p th:text="${day}"></p>
 				</div>
 			</div>
-			<div class="row" th:each="user : ${events.getBoardMembers()}">
+			<div class="row row-small-padding" th:each="user : ${events.getBoardMembers()}">
 				<div class="col-sm-2 user-cell">
 					<div class="col-sm-6">
 						<img height="120" width="120" alt="user"
