@@ -32,14 +32,15 @@
 					<p th:text="${day}"></p>
 				</div>
 			</div>
+			<div class="users_and_events_window">
 			<div class="row row-small-padding" th:each="user : ${events.getBoardMembers()}">
 				<div class="col-sm-2 user-cell">
 					<div class="col-sm-6">
-						<img height="120" width="120" alt="user"
+						<img height="110" width="110" alt="user"
 							th:src="@{'/avatar/'+${user.name}}" />
 					</div>
 					<div class="col-sm-6">
-						<p th:text="${user.name}">username</p>
+						<label class="username_label" th:text="${user.name}">username</label>
 					</div>
 				</div>
 				<div class="col-sm-2 event" th:each="day : ${events.week} "
@@ -50,6 +51,7 @@
 							th:text="${event.eventType}">eventType</label>
 					</div>
 				</div>
+			</div>
 			</div>
 		</th:block>
 	</div>

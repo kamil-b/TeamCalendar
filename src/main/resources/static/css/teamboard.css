@@ -35,7 +35,7 @@
     border-width: 1px;
 }*/
 label {
-  margin-top: 5px;
+  margin-top: 0px;
   padding-top: 35px;
   height: 120px;
   text-align: center;
@@ -43,6 +43,13 @@ label {
   display: block;
   line-height: 150%;
   font-size: 20px; }
+
+.username_label {
+  margin-top: 0px;
+  height: auto; }
+
+.users_and_events_window {
+  margin: 5px; }
 
 .boardcontainer {
   /*    padding-left: 20px;
@@ -69,6 +76,7 @@ test {
   background-color: blueviolet; }
 
 p {
+  color: white;
   font-size: 22px;
   margin: 0 0 0;
   font-weight: 500;
