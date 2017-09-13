@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <title>Event status</title>
 <link rel="stylesheet" type="text/css" href="/css/eventstatus.css" />
@@ -16,7 +16,7 @@
 			<h1>Events status</h1>
 		</div>
 	</div>
-	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div th:replace="fragments/navbar :: header">...</div>
 	<div th:if="${userRole} == 'LINE_MANAGER'" class="container">
 		<div
 			th:replace="fragments/eventstatussection :: superior_events_status">

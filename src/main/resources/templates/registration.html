@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <link rel="stylesheet" type="text/css" href="/css/registration.css" />
 <link rel="stylesheet"
@@ -10,12 +10,10 @@
 <title>Registration page</title>
 </head>
 <body>
-	<div th:if="${logged} == false">
+	<div>
 		<div th:replace="fragments/navbar :: header">...</div>
 	</div>
-	<div th:unless="${logged} == false">
-		<div th:replace="fragments/navbar :: header_logged">...</div>
-	</div>
+
 	<div class="logincontainer">
 		<div class="register-form">
 			<form th:object="${user}" method="POST">

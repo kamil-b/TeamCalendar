@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -12,25 +12,26 @@
 </head>
 <body>
 	<div>
-	
 		<div class="jumbotron">
 			<div class="container">
-				<div th:if="${logged} == false">
+				<div sec:authorize="!isAuthenticated()">
 					<h1>Welcome!</h1>
 				</div>
-				<div th:unless="${logged} == false">
+				<div sec:authorize="isAuthenticated()">
 					<h1 th:text="'Welcome, ' + ${name}">Welcome!</h1>
 				</div>
 			</div>
 		</div>
-		<div th:if="${logged} == false">
+		<div>
 			<div th:replace="fragments/navbar :: header">...</div>
 		</div>
-		<div th:unless="${logged} == false">
-			<div th:replace="fragments/navbar :: header_logged">...</div>
+		<!-- 		<div sec:authorize="isAuthenticated()">
+			<p>TEST TEST dupa TEST !!</p>
 		</div>
+		<div sec:authorize="hasAuthority('ADMIN')">This content is only
+			shown to administrators.</div> -->
 		<div class="container" id="headertitle">
-			<div th:if="${logged} == false">
+			<div sec:authorize="!isAuthenticated()">
 				<br></br> <br></br>
 				<h3>
 					Hello, please <a th:href="@{/login}">log in</a> to see content or <a
@@ -39,7 +40,7 @@
 				</h3>
 				<!-- <div class="container" th:replace="fragments/carousel :: carousel">...</div> -->
 			</div>
-			<div th:unless="${logged} == false">
+			<div sec:authorize="isAuthenticated()">
 				<div class="actions ">
 					<div class="row">
 						<form method="GET" th:action="@{'/user/' + ${name} + '/events'}">
@@ -58,25 +59,26 @@
 								BOARD</button>
 						</form>
 					</div>
-					<div class="row" th:if="${isAdmin} == true">
+					<div class="row" sec:authorize="hasAuthority('ADMIN')">
 						<form method="GET" th:action="@{'/adminpanel'}">
 							<button type="submit" class=" subbutton green">ADMIN
 								PANEL</button>
 						</form>
 						<form method="GET" th:action="@{'/console'}">
-							<button type="submit" class=" subbutton green">DATABASE CONSOLE</button>
+							<button type="submit" class=" subbutton green">DATABASE
+								CONSOLE</button>
 						</form>
 					</div>
 				</div>
-				<div class="boardframe">
-					<h1>Boards:</h1>
-					<div th:each="board : ${boards}">
-						<form class="col-sm-3" method="GET"
-							th:action="@{'/board/' + ${board.name}}">
-							<button type="submit" class=" subbutton green"
-								th:text="${board.name}"></button>
-						</form>
-					</div>
+			</div>
+			<div class="boardframe">
+				<h1>Boards:</h1>
+				<div th:each="board : ${boards}">
+					<form class="col-sm-3" method="GET"
+						th:action="@{'/board/' + ${board.name}}">
+						<button type="submit" class=" subbutton green"
+							th:text="${board.name}"></button>
+					</form>
 				</div>
 			</div>
 		</div>

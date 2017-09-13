@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -21,7 +21,12 @@
 				<ul class="nav navbar-nav">
 					<li><a th:href="@{/home}">Home</a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
+				<ul sec:authorize="isAuthenticated()" class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/logout}"><span
+							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				</ul>
+				<ul sec:authorize="!isAuthenticated()"
+					class="nav navbar-nav navbar-right">
 					<li><a th:href="@{/user/registration}"><span
 							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 					<li><a th:href="@{/login}"><span
@@ -30,7 +35,7 @@
 			</div>
 		</nav>
 	</div>
-	<div th:fragment="header_logged">
+	<!-- <div th:fragment="header_logged">
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -43,8 +48,14 @@
 					<li><a th:href="@{/logout}"><span
 							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/user/registration}"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a th:href="@{/login}"><span
+							class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
 			</div>
 		</nav>
-	</div>
+	</div> -->
 </body>
 </html>

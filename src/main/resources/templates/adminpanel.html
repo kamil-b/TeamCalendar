@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -17,7 +17,7 @@
 			<p th:text="'Welcome, ' + ${name}">Welcome!</p>
 		</div>
 	</div>
-	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div th:replace="fragments/navbar :: header">...</div>
 	<div class="container">
 		<!-- 	<div>
 			<form th:each="board : ${boardList}" th:object="${removedBoard}"

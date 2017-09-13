@@ -87,6 +87,11 @@
 			<artifactId>selenium-chrome-driver</artifactId>
 
 		</dependency>
+		<!-- for sec: tag in thymeleaf -->
+			<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+		</dependency> 
 	</dependencies>
 
 	<properties>

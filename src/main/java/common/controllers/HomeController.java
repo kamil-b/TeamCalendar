@@ -25,12 +25,6 @@ public class HomeController {
 
 	@RequestMapping(value = { "", "/", "/home" }, method = RequestMethod.GET)
 	public String showHome(Principal principal, Model model) {
-		boolean logged = securityService.isLogged(principal);
-		model.addAttribute("logged", logged);
-		if (logged) {
-			model.addAttribute("isAdmin", userService.findByName(securityService.getCurrentUserName(principal))
-					.getUserRole().equals(UserRole.ADMIN));
-		}
 		model.addAttribute("name", securityService.getCurrentUserName(principal));
 		model.addAttribute("boards", boardService.findAll());
 		return "home";

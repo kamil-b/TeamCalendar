@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <link rel=" stylesheet" type="text/css" href="/css/details.css" />
 <link rel="stylesheet"
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div th:replace="fragments/navbar :: header">...</div>
 	<div>
 		<div th:if="${reason} != null"
 			class="alert alert-success alert-dismissable">

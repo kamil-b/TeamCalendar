@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <link rel=" stylesheet" type="text/css" href="css/addtip.css" />
 <link rel="stylesheet"
@@ -15,7 +15,7 @@
 	<div class="jumbotron">
 		<div class="container"></div>
 	</div>
-	<div th:replace="fragments/navbar :: header_logged">...</div>
+	<div th:replace="fragments/navbar :: header">...</div>
 	<div class="container">
 		<form action="" th:object="${tip}" method="POST">
 			<div class="row space">

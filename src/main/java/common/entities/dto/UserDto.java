@@ -6,6 +6,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import common.entities.Board;
@@ -19,15 +21,20 @@ public class UserDto {
 
 	@NotNull
 	@NotEmpty
+	@NotBlank
+	@Length(min = 5, message = "The field must be at least 5 characters")
 	private String name;
 	@NotNull
 	@NotEmpty
+	@NotBlank
 	private String password;
 	@NotNull
 	@NotEmpty
+	@NotBlank
 	private String matchingPassword;
 	@NotNull
 	@NotEmpty
+	@NotBlank
 	private String email;
 	private Long id;
 	@Enumerated(EnumType.STRING)

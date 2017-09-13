@@ -29,9 +29,8 @@ public class RegistrationController {
 	UserService userService;
 
 	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
-	public String showRegistrationForm(Model model, Principal principal) {
+	public String showRegistrationForm(Model model) {
 		model.addAttribute("allRoles", Arrays.asList(JobRole.values()));
-		model.addAttribute("logged", principal != null);
 		model.addAttribute("user", new UserDto());
 		return "registration";
 	}
