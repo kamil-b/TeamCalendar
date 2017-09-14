@@ -42,7 +42,7 @@
 					</div>
 				</div>
 				<div class="col-sm-2 event" th:each="day : ${events.week} "
-					th:classappend="${events.isEventToday(day) ? 'today' : 'test'}">
+					th:classappend="${events.isEventToday(day) ? 'today' : ''}">
 					<div th:each="event : ${events.getEventsBySpecificDate(day)}">
 						<label class="event_label" th:if="${event.username == user.name}"
 							th:classappend="'event-' + ${event.eventType}"

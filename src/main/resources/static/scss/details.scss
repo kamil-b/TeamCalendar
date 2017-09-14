@@ -14,8 +14,9 @@ tr {
 }
 
 label {
+    display: inline;
     font-size: 16px;
-    width: 100%;
+    //width: 100%;
 }
 
 .subbutton {
@@ -28,7 +29,6 @@ label {
     font-size: 16px;
     margin: 2px;
 }
-
 
 .red {
     background-color: #f44336;
@@ -70,4 +70,8 @@ label {
 
 .boardsframe {
     padding: 5px;
+}
+
+table {
+    width: 100%;
 }

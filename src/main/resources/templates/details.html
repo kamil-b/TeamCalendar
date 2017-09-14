@@ -3,11 +3,11 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<link rel=" stylesheet" type="text/css" href="/css/details.css" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
 <link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+<link rel=" stylesheet" type="text/css" href="/css/details.css" />
 <title>Update profile</title>
 </head>
 <body>
@@ -54,24 +54,27 @@
 			<div class="boardsframe">
 				<div th:object="${user.boards}" th:unless="${list.isEmpty()}">
 					<table>
+						<tr>
+							<td><label>Available boards:</label></td>
+						</tr>
 						<tr class="columnnames">
-							<td class="col-sm-3"><label>Board name</label></td>
+							<td class="col-sm-2"><label>Board name</label></td>
 							<td class="col-sm-4"><label>Members</label></td>
-							<td class="col-sm-4"><label>Description</label></td>
-							<td class="col-sm-1"><label>Action</label></td>
+							<td class="col-sm-3"><label>Description</label></td>
+							<td class="col-sm-3"><label>Action</label></td>
 						</tr>
 						<th:block th:each="board : ${list}">
 							<tr class="memberscell">
-								<td class="col-sm-3"><label th:text="${board.name}"></label></td>
-								<td class=" col-sm-4"><label
+								<td class="col-sm-2"><button type="button" class="btn btn-primary" th:text="${board.name}"></button></td>
+								<td class=" col-sm-4"><button type="button" class="btn btn-primary"
 									th:each="member : ${board.members}"
-									th:text="${member.name} + ' '"></label></td>
-								<td class="col-sm-4"><label th:text="${board.description}"></label></td>
-								<td class="col-sm-1 ">
+									th:text="${member.name} + ' '"></button></td>
+								<td class="col-sm-3"><label th:text="${board.description}"></label></td>
+								<td class="col-sm-3 ">
 									<form action="" method="POST" th:object="${selectedboard}">
 										<textarea hidden="true" th:field="*{name}"
 											th:text="${board.name}"></textarea>
-										<button type="submit" class="subbutton green">Submit</button>
+										<button type="submit" class="subbutton green">Subscribe</button>
 									</form>
 								</td>
 							</tr>
@@ -86,32 +89,31 @@
 							<td><label>Your boards:</label></td>
 						</tr>
 						<tr class="columnnames ">
-							<td class="col-sm-3"><label>Board name</label></td>
+							<td class="col-sm-2"><label>Board name</label></td>
 							<td class="col-sm-4"><label>Members</label></td>
-							<td class="col-sm-2"><label>Description</label></td>
+							<td class="col-sm-3"><label>Description</label></td>
 							<td class="col-sm-3"><label>Action</label></td>
 						</tr>
 						<tr class=" memberscell" th:each="board : ${user.boards}">
-							<td class="col-sm-3"><label th:text="${board.name}">board
-									name</label></td>
-							<td class=" col-sm-3"><label
-								th:each="member : ${board.members}"
-								th:text="${member.name} + ' '"></label></td>
-							<td class="col-sm-3"><label th:text="${board.description}"></label>
+							<td class="col-sm-2"><button type="button" class="btn btn-primary" th:text="${board.name}"></button></td>
+							<td class=" col-sm-4"><button type="button" class="btn btn-primary"
+									th:each="member : ${board.members}"
+									th:text="${member.name} + ' '"></button></td>
+							<td class="col-sm-2"><label th:text="${board.description}"></label>
 							</td>
 							<td class="col-sm-3">
 								<div class="row">
-									<div class="col-sm-5">
-										<form method="GET" th:action="@{'/board/' + ${board.name}}">
-											<button type="submit" class=" subbutton green">Visit</button>
-										</form>
-									</div>
-									<div class="col-sm-2"></div>
 									<div class="col-sm-5">
 										<form method="POST" th:object="${selectedboard}">
 											<textarea hidden="true" th:field="*{name}"
 												th:text="${board.name}"></textarea>
 											<button type="submit" class="subbutton red">Unsubscribe</button>
+										</form>
+									</div>
+									<div class="col-sm-2"></div>
+									<div class="col-sm-5">
+										<form method="GET" th:action="@{'/board/' + ${board.name}}">
+											<button type="submit" class=" subbutton green">Visit</button>
 										</form>
 									</div>
 								</div>

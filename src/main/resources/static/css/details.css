@@ -11,8 +11,8 @@ tr {
   color: white; }
 
 label {
-  font-size: 16px;
-  width: 100%; }
+  display: inline;
+  font-size: 16px; }
 
 .subbutton {
   border: none;
@@ -53,3 +53,6 @@ label {
 
 .boardsframe {
   padding: 5px; }
+
+table {
+  width: 100%; }

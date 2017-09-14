@@ -37,17 +37,8 @@ public class AdministrationPageController {
 	@RequestMapping(value = "/adminpanel", method = RequestMethod.GET)
 	public String loadAdministrationPage(Principal principal, RedirectAttributes redirectAttributes, Model model) {
 
-		UserRole role = userService.findByName(securityService.getCurrentUserName(principal)).getUserRole();
-
-		/*
-		 * if (role != null && !role.equals(UserRole.ADMIN)) {
-		 * redirectAttributes.addFlashAttribute("reason",
-		 * "You dont have permision to visit this site !!"); return
-		 * "redirect:/error"; }
-		 */
 		model.addAttribute("userList", userService.findAll());
 		model.addAttribute("boardList", boardService.findAll());
-		model.addAttribute("logged", securityService.isLogged(principal));
 		model.addAttribute("name", securityService.getCurrentUserName(principal));
 		model.addAttribute("removedBoard", new String());
 		model.addAttribute("removedUser", new UserDto());
