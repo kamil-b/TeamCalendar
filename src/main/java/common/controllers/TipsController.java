@@ -30,11 +30,10 @@ public class TipsController {
 	@RequestMapping("/tips")
 	public String printTips(Model model) {
 
-		List<Tip> tips = new ArrayList<Tip>();
+		List<Tip> tips = new ArrayList<>();
 
 		for (Tip tip : tipService.findAll()) {
 			tips.add(tip);
-			System.out.println(tip.toString());
 		}
 		model.addAttribute("tips", tips);
 		return "tips";
@@ -43,7 +42,7 @@ public class TipsController {
 	@RequestMapping(value = "/addtip", method = RequestMethod.GET)
 	public String showAddTip(Model model) {
 
-		sectionsList = new ArrayList<String>(Arrays.asList("Git", "Linux", "Maven", "Others"));
+		sectionsList = new ArrayList<>(Arrays.asList("Git", "Linux", "Maven", "Others"));
 		TipDto tipDto = new TipDto();
 		model.addAttribute("sectionsList", sectionsList);
 		model.addAttribute("tip", tipDto);

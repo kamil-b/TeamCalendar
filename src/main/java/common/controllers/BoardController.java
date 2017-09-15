@@ -56,9 +56,9 @@ public class BoardController {
 		} else {
 			formatter = DateTimeFormat.forPattern("EEEE dd.MM");
 		}
-		daysList = new ArrayList<LocalDate>(CalenderHelper.getNextDays(nextDays));
-		eventsInThisWeek = new ArrayList<Event>();
-		List<String> weekDays = new ArrayList<String>();
+		daysList = new ArrayList<>(CalenderHelper.getNextDays(nextDays));
+		eventsInThisWeek = new ArrayList<>();
+		List<String> weekDays = new ArrayList<>();
 
 		for (LocalDate day : daysList) {
 			weekDays.add(formatter.print(day));

@@ -30,7 +30,7 @@ import common.repository.UserService;
 @Controller
 public class AddEventsController {
 
-	private static final int TIMEOUT_MILISECONDS = 5000;
+	private static final int DEFAULT_TIMEOUT_MILISECONDS = 5000;
 	private EventDtoListForm eventForm;
 
 	@Autowired
@@ -64,7 +64,7 @@ public class AddEventsController {
 		User user = userService.findByName(principal.getName());
 
 		// TODO: move code below to eventService !
-		List<Event> upadatedEvents = new ArrayList<Event>();
+		List<Event> upadatedEvents = new ArrayList<>();
 		for (EventDto eventDto : eventForm.getEventslist()) {
 			upadatedEvents.add(eventService.updateAndReturnUpdated(eventService.returnEvent(eventDto)));
 
@@ -97,9 +97,9 @@ public class AddEventsController {
 		props.put("mail.smtp.starttls.enable", true);
 		props.put("mail.smtp.ssl.enable", true);
 		props.put("mail.debug", true);
-		props.put("mail.smtp.connectiontimeout", TIMEOUT_MILISECONDS);
-		props.put("mail.smtp.timeout", TIMEOUT_MILISECONDS);
-		props.put("mail.smtp.writetimeout", TIMEOUT_MILISECONDS);
+		props.put("mail.smtp.connectiontimeout", DEFAULT_TIMEOUT_MILISECONDS);
+		props.put("mail.smtp.timeout", DEFAULT_TIMEOUT_MILISECONDS);
+		props.put("mail.smtp.writetimeout", DEFAULT_TIMEOUT_MILISECONDS);
 
 		return mailSender;
 	}

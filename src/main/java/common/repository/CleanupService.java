@@ -34,6 +34,7 @@ public class CleanupService {
 		 * oldEvents.addAll(eventRepository.findByDate(now.minusDays(i))); }
 		 */
 		IntStream.range(ONE_DAY_BEFORE, WEEK_BEFORE).forEach(x -> oldEvents.addAll(eventRepository.findByDate(now.minusDays(x))));
+		
 		for (Event ev : oldEvents) {
 			logger.info("Removing event: " + ev);
 			eventRepository.delete(ev.getId());

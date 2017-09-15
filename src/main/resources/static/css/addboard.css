@@ -14,6 +14,18 @@
 .red:hover {
   background-color: red; }
 
+.blue:hover {
+  background-color: #3696f9; }
+
+.blue {
+  background-color: #003366; }
+
+.grey {
+  background-color: dimgrey; }
+
+.grey:hover {
+  background-color: grey; }
+
 .event-HOMEWORK {
   background-color: mediumvioletred; }
 

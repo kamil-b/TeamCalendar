@@ -35,7 +35,7 @@ public class UpdateProfileController {
 		}
 
 		UserDto userDto = userService.returnUserDto(userService.findByName(username));
-		List<JobRole> allRoles = new ArrayList<JobRole>(Arrays.asList(JobRole.values()));
+		List<JobRole> allRoles = new ArrayList<>(Arrays.asList(JobRole.values()));
 		List<User> superiorsList = userService.findAllByRole(JobRole.LINE_MANAGER);
 
 		model.addAttribute("allSuperiors", superiorsList);

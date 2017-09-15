@@ -53,7 +53,7 @@ public class EventService {
 	}
 
 	public List<EventDto> returnListOfEventDto(Map<LocalDate, Event> events) {
-		List<EventDto> eventsDtoList = new ArrayList<EventDto>();
+		List<EventDto> eventsDtoList = new ArrayList<>();
 		for (Event event : events.values()) {
 			EventDto eventDto = returnEventDto(event);
 			eventsDtoList.add(eventDto);
@@ -62,7 +62,7 @@ public class EventService {
 	}
 
 	public List<EventDto> returnListOfEventDto(List<Event> events) {
-		List<EventDto> eventsDtoList = new ArrayList<EventDto>();
+		List<EventDto> eventsDtoList = new ArrayList<>();
 		for (Event event : events) {
 			EventDto eventDto = returnEventDto(event);
 			eventsDtoList.add(eventDto);
@@ -129,7 +129,7 @@ public class EventService {
 	}
 
 	public ArrayList<EventDto> getChangedEventsDto(List<EventDto> all, List<EventDto> changed) {
-		ArrayList<EventDto> changedEvents = new ArrayList<EventDto>();
+		ArrayList<EventDto> changedEvents = new ArrayList<>();
 		for (int i = 0; i < changed.size(); i++) {
 			if (!changed.get(i).getEventType().equals(all.get(i).getEventType())) {
 				changedEvents.add(changed.get(i));
@@ -182,7 +182,7 @@ public class EventService {
 	 */
 	public List<Event> getAllEventsBelongedToSuperior(String superior) {
 		List<User> users = userService.getAllUsersForSuperior(superior);
-		List<Event> events = new ArrayList<Event>();
+		List<Event> events = new ArrayList<>();
 
 		for (User user : users) {
 			events.addAll(eventRepository.findByUsername(user.getName()));

@@ -1,10 +1,8 @@
 package common.controllers;
 
-import java.security.Principal;
 import java.util.Arrays;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,14 +23,17 @@ import common.repository.UserService;
 @Controller
 public class RegistrationController {
 
+	private final static String ALL_ROLES = "allRoles";
+	private final static String REGISTRATION_PAGE = "registration";
+	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
 	public String showRegistrationForm(Model model) {
-		model.addAttribute("allRoles", Arrays.asList(JobRole.values()));
+		model.addAttribute(ALL_ROLES, Arrays.asList(JobRole.values()));
 		model.addAttribute("user", new UserDto());
-		return "registration";
+		return REGISTRATION_PAGE;
 	}
 
 	// TODO
@@ -42,8 +43,8 @@ public class RegistrationController {
 			Errors errors) {
 		if (!result.hasErrors()) {
 			if (userService.userExists(userDto.getName())) {
-				return new ModelAndView("registration", "user", userDto)
-						.addObject("allRoles", Arrays.asList(JobRole.values()))
+				return new ModelAndView(REGISTRATION_PAGE, "user", userDto)
+						.addObject(ALL_ROLES, Arrays.asList(JobRole.values()))
 						.addObject("reason", "Username " + userDto.getName() + " allready exists!");
 			}
 			User user = userService.createUserAccount(userDto);
@@ -53,7 +54,7 @@ public class RegistrationController {
 			return new ModelAndView("successRegister", "user", userDto);
 		}
 
-		return new ModelAndView("registration", "user", userDto).addObject("allRoles", Arrays.asList(JobRole.values()));
+		return new ModelAndView(REGISTRATION_PAGE, "user", userDto).addObject(ALL_ROLES, Arrays.asList(JobRole.values()));
 
 	}
 

@@ -69,7 +69,6 @@ public class EventsStatusController {
 	public String updateEventStatus(@PathVariable("username") String username,
 			@ModelAttribute("updated") EventDto updatedDto, Model model) {
 
-		System.out.println("event: " + updatedDto.toString());
 		Event event = eventService.getEventById(updatedDto.getId());
 		event.setEventStatus(updatedDto.getEventStatus());
 		eventService.save(event);

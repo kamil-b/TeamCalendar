@@ -4,30 +4,55 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <title>Upload image</title>
+
+<script >
+function getName(){ // update label with name of choosen file
+	var filepath = document.getElementById('file-upload').value;
+	var name = filepath.split(/(\\|\/)/g).pop();
+	document.getElementById('file-upload-label').innerHTML=name;
+	document.getElementById('file-upload-label').color = "green";
+	}
+</script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+<link rel="stylesheet" type="text/css" href="/css/navbar.css" />
 <link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+<link rel="stylesheet" type="text/css" href="/css/default.css" />
+<link rel="stylesheet" type="text/css" href="/css/upload.css" />
 </head>
 <body>
-<div class="jumbotron">
-	<div class="container">
+	<div class="jumbotron">
+		<div class="container">
 			<h1>Upload user avatar</h1>
 		</div>
 	</div>
-		<div th:replace="fragments/navbar :: header">...</div>
+	<div th:replace="fragments/navbar :: header">...</div>
 	<div class="container">
 		<form method="POST" action="/upload" enctype="multipart/form-data">
-		
-			<div>
-				<img th:src="@{'/avatar/'+ ${username}}" height="120" width="120" />
+			<div class="row">
+				<div class="col-sm-10">
+					<div class="row" id="upload-container">
+						<div class="col-sm-2" >
+							<img th:src="@{'/avatar/'+ ${username}}" height="160" width="160" />
+						</div>
+						<div  id="message-container" class="col-sm-10"  th:if="${message}">
+						<div th:classappend="${success ? 'success' : 'failure'}" class="common">
+							<span th:classappend="${success ? 'glyphicon-ok' : 'glyphicon-remove'}" class="glyphicon "></span>
+							<h2 id="message-info"  th:text="${message}">message</h2>
+							</div>
+						</div>
+					</div>
+					<label id="file-upload-label" for="file-upload"
+						class="subbutton grey"> Browse... </label> <input onchange="getName()"
+						id="file-upload" type="file" name="file" />
+					<!-- <input
+						class="subbutton blue" type="file" name="file" /> -->
+					<br /> <br /> <input class="subbutton blue" type="submit"
+						value="Submit" />
+				</div>
+				<div class="col-sm-2"></div>
 			</div>
-			<input type="file" name="file" /><br />
-			<br /> <input type="submit" value="submit" />
 		</form>
-		<div th:if="${message}">
-			<h2 th:text="${message}"> message </h2>
-		</div>
 	</div>
 </body>
 </html>

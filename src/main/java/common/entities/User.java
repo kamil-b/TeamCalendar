@@ -23,6 +23,10 @@ import common.entities.enums.UserRole;
 @Entity
 public class User implements UserDetails {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -31,7 +35,7 @@ public class User implements UserDetails {
 	private String password;
 
 	@ManyToMany(targetEntity = Board.class, cascade = CascadeType.ALL)
-	private List<Board> boards = new ArrayList<Board>();
+	private List<Board> boards = new ArrayList<>();
 	private String email;
 	private JobRole role;
 	private String remoteWorkLocation;
@@ -84,7 +88,7 @@ public class User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+		List<GrantedAuthority> list = new ArrayList<>();
 		list.add(new SimpleGrantedAuthority(userRole.toString()));
 		return list;
 	}
@@ -178,7 +182,7 @@ public class User implements UserDetails {
 	public String toString() {
 		return "User [id=" + id + ", superior=" + superior + ", name=" + name + ", password=" + password + ", boards="
 				+ boards + ", email=" + email + ", role=" + role + ", remoteWorkLocation=" + remoteWorkLocation
-				+ ", userRole=" + userRole + ", image=" + Arrays.toString(image) + "]";
+				+ ", userRole=" + userRole ;
 	}
 
 }

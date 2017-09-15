@@ -1,0 +1,23 @@
+input[type="file"] {
+  display: none; }
+
+.common {
+  font-size: 40px;
+  text-align: center;
+  vertical-align: middle; }
+
+.failure {
+  color: red; }
+
+.success {
+  color: limegreen; }
+
+#message-container {
+  padding: 10px;
+  padding-bottom: 20px; }
+
+#upload-container {
+  margin: 20px; }
+
+#message-info {
+  display: inline; }
