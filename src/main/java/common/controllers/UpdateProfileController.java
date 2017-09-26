@@ -55,6 +55,8 @@ public class UpdateProfileController {
 		user.setRole(updated.getRole());
 		user.setSuperior(updated.getSuperior());
 		user.setRemoteWorkLocation(updated.getRemoteWorkLocation());
+		user.setPhone(updated.getPhone());
+		user.setRoom(updated.getRoom());
 
 		userService.update(user);
 

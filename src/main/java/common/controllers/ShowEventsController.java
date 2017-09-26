@@ -34,6 +34,11 @@ public class ShowEventsController {
 	private EventDtoListForm eventForm;
 	private List<EventType> eventtypes = Arrays.asList(EventType.values());
 
+	@RequestMapping(value = "/user/events", method = RequestMethod.GET)
+	public ModelAndView showCalenderDefault(@PathVariable("name") String name, Model model, Principal principal) {
+		return showCalender(principal.getName(), model, principal);
+	}
+
 	@RequestMapping(value = "/user/{name}/events", method = RequestMethod.GET)
 	public ModelAndView showCalender(@PathVariable("name") String name, Model model, Principal principal) {
 
@@ -42,7 +47,7 @@ public class ShowEventsController {
 		}
 
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("EEEE\n dd.MM");
-		Map<LocalDate, Event> events = eventService.getAllEventsForUserForNext30Days(name);
+		Map<LocalDate, Event> events = eventService.getAllEventsForUserForNextDays(name, 30);
 		eventForm = new EventDtoListForm();
 		eventForm.setEventslist((ArrayList<EventDto>) eventService.returnListOfEventDto(events));
 

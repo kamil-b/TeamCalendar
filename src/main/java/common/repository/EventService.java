@@ -10,8 +10,7 @@ import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
+
 import org.springframework.stereotype.Service;
 import common.entities.Event;
 import common.entities.User;
@@ -19,7 +18,6 @@ import common.entities.dto.EventDto;
 import common.entities.enums.EventType;
 
 @Service
-
 public class EventService {
 
 	private final static Logger logger = LoggerFactory.getLogger(EventService.class);
@@ -70,25 +68,23 @@ public class EventService {
 		return eventsDtoList;
 	}
 
-	public Map<LocalDate, Event> getAllEventsForUserForNext30Days(String username) {
+	public Map<LocalDate, Event> getAllEventsForUserForNextDays(String username, int numberOfDays) {
 		LocalDate date = new LocalDate(LocalDate.now());
-		Map<LocalDate, Event> eventsInNext30Days = new LinkedHashMap<LocalDate, Event>();
-
+		Map<LocalDate, Event> eventsInNextDays = new LinkedHashMap<LocalDate, Event>();
 		List<Event> events;
-
-		IntStream.range(0, 30).forEach(i -> eventsInNext30Days.put(date.plusDays(i),
+		IntStream.range(0, numberOfDays).forEach(i -> eventsInNextDays.put(date.plusDays(i),
 				new Event(username, date.plusDays(i), EventType.NO_EVENT)));
 
 		events = eventRepository.findByUsername(userService.findByName(username).getUsername());
 
 		for (Event event : events) {
 			LocalDate day = event.getDate();
-			if (eventsInNext30Days.containsKey(day)) {
-				eventsInNext30Days.put(day, event);
+			if (eventsInNextDays.containsKey(day)) {
+				eventsInNextDays.put(day, event);
 			}
 		}
 
-		return eventsInNext30Days;
+		return eventsInNextDays;
 
 	}
 

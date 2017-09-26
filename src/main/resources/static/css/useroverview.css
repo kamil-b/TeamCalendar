@@ -1,0 +1,61 @@
+.subbutton {
+  width: 100%;
+  border: 0;
+  color: white;
+  padding: 14px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; }
+
+.red {
+  background-color: #f44336; }
+
+.red:hover {
+  background-color: red; }
+
+.blue:hover {
+  background-color: #3696f9; }
+
+.blue {
+  background-color: #003366; }
+
+.grey {
+  background-color: dimgrey; }
+
+.grey:hover {
+  background-color: grey; }
+
+.event-HOMEWORK {
+  background-color: mediumvioletred; }
+
+.event-NO_EVENT {
+  background-color: gainsboro; }
+
+.event-VACATION {
+  background-color: greenyellow; }
+
+.event-SICK_LEAVE {
+  background-color: deepskyblue; }
+
+.event-TRAINING {
+  background-color: yellow; }
+
+.userinfo {
+  padding-top: 30px;
+  font-size: 16px; }
+
+label {
+  padding: 5px; }
+
+.weekevents > label {
+  text-align: center;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.rowname {
+  margin-right: 10px; }
+
+.rowname > label {
+  color: #23527c; }

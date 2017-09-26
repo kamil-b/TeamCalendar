@@ -1,7 +1,6 @@
 package common.entities;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,9 +22,6 @@ import common.entities.enums.UserRole;
 @Entity
 public class User implements UserDetails {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,11 +31,13 @@ public class User implements UserDetails {
 	private String password;
 
 	@ManyToMany(targetEntity = Board.class, cascade = CascadeType.ALL)
-	private List<Board> boards = new ArrayList<>();
+	private List<Board> boards = new ArrayList<Board>();
 	private String email;
 	private JobRole role;
 	private String remoteWorkLocation;
 	private UserRole userRole = UserRole.USER;
+	private String phone;
+	private String room;
 
 	@Column(columnDefinition = "image")
 	private byte[] image;
@@ -177,12 +175,27 @@ public class User implements UserDetails {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", superior=" + superior + ", name=" + name + ", password=" + password + ", boards="
-				+ boards + ", email=" + email + ", role=" + role + ", remoteWorkLocation=" + remoteWorkLocation
-				+ ", userRole=" + userRole ;
+		return "User [id=" + id + ", superior=" + superior + ", name=" + name + ", password=" + password + ", email="
+				+ email + ", role=" + role + ", remoteWorkLocation=" + remoteWorkLocation + ", userRole=" + userRole;
 	}
 
 }

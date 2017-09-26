@@ -29,14 +29,10 @@ public class CleanupService {
 		logger.info("Starting cleaning process for old events...");
 		LocalDate now = new LocalDate();
 		List<Event> oldEvents = new ArrayList<Event>();
-		/*
-		 * for (int i = 1; i < WEEK_BEFORE; i++) {
-		 * oldEvents.addAll(eventRepository.findByDate(now.minusDays(i))); }
-		 */
-		IntStream.range(ONE_DAY_BEFORE, WEEK_BEFORE).forEach(x -> oldEvents.addAll(eventRepository.findByDate(now.minusDays(x))));
-		
+		oldEvents = eventRepository.findByDateLessThan(now.minusDays(ONE_DAY_BEFORE));
+		 
 		for (Event ev : oldEvents) {
-			logger.info("Removing event: " + ev);
+			logger.info("Removing event: " + ev.toString());
 			eventRepository.delete(ev.getId());
 		}
 		logger.info("Old events Removed.");

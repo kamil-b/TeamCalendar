@@ -43,6 +43,8 @@ public class UserDto {
 	private String remoteWorkLocation;
 	@Enumerated(EnumType.STRING)
 	private UserRole userRole = UserRole.USER;
+	private String phone;
+	private String room;
 
 	private List<Board> boards = new ArrayList<Board>();
 
@@ -124,6 +126,22 @@ public class UserDto {
 
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
 	}
 
 	@Override

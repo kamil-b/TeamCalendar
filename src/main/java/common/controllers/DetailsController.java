@@ -31,6 +31,11 @@ public class DetailsController {
 	@Autowired
 	private BoardService boardService;
 
+	@RequestMapping(value = "/user/details", method = RequestMethod.GET)
+	public ModelAndView showUserDetailsDefault(Principal principal, Model model){
+		return showUserDetails(principal.getName(), model, principal) ;
+	}
+	
 	@RequestMapping(value = "/user/{name}/details", method = RequestMethod.GET)
 	public ModelAndView showUserDetails(@PathVariable("name") String name, Model model, Principal principal) {
 
@@ -49,6 +54,13 @@ public class DetailsController {
 
 	}
 
+	
+	@RequestMapping(value = "/user/details", method = RequestMethod.POST)
+	public String assigneToBoardDefault(Principal principal,
+			@ModelAttribute(value = "selectedboard") Board selectedboard, Model model){
+		return assigneToBoard(principal.getName(),  selectedboard,  model) ;
+	}
+	
 	@RequestMapping(value = "/user/{username}/details", method = RequestMethod.POST)
 	public String assigneToBoard(@PathVariable("username") String username,
 			@ModelAttribute(value = "selectedboard") Board selectedboard, Model model) {

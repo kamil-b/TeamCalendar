@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 								// /console
 
 		http.authorizeRequests()
-				.antMatchers("/", "/home", "/user/registration", "/css/**", "/images/**", "/board/**", "/avatar/**",
+				.antMatchers("/", "/home", "/user/registration", "/css/**", "/images/**", "/board/**",
 						"/logout")
 				.permitAll().and().logout().permitAll().and().formLogin().loginPage("/login").permitAll();
 

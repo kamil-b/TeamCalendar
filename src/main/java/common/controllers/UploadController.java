@@ -29,7 +29,7 @@ import common.repository.UserService;
 public class UploadController {
 
 	private final static Logger logger = LoggerFactory.getLogger(UploadController.class);
-	private static final String PROJECT_PATH = "\\src\\main\\resources\\static\\images\\users\\";
+	private static final String PROJECT_PATH = "\\src\\main\\resources\\static\\images\\";
 	private static final String DEFAULT_AVATAR_PATH = System.getProperty("user.dir") + PROJECT_PATH + "user.png";
 
 	@Autowired

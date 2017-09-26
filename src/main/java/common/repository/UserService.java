@@ -74,6 +74,8 @@ public class UserService implements UserDetailsService {
 		registered.setRole(userDto.getRole());
 		registered.setSuperior(userDto.getSuperior());
 		registered.setUserRole(userDto.getUserRole());
+		registered.setPhone(userDto.getPhone());
+		registered.setRoom(userDto.getRoom());
 		logger.info("New user: " + userDto.getName() + " has been created in database.");
 		return repository.save(registered);
 	}
@@ -90,6 +92,8 @@ public class UserService implements UserDetailsService {
 		userDto.setSuperior(user.getSuperior());
 		userDto.setUserRole(user.getUserRole());
 		userDto.setRemoteWorkLocation(user.getRemoteWorkLocation());
+		userDto.setPhone(user.getPhone());
+		userDto.setRoom(user.getRoom());
 		return userDto;
 	}
 
@@ -103,6 +107,8 @@ public class UserService implements UserDetailsService {
 		user.setRole(userDto.getRole());
 		user.setSuperior(userDto.getSuperior());
 		user.setRemoteWorkLocation(userDto.getRemoteWorkLocation());
+		user.setPhone(userDto.getPhone());
+		user.setRoom(userDto.getRoom());
 		return user;
 	}
 

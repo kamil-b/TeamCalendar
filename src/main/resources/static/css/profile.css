@@ -25,3 +25,12 @@ input {
 
 .red:hover {
   background-color: red; }
+
+.row {
+  margin: 5px; }
+
+select {
+  height: 45px; }
+
+label {
+  padding: 10px; }

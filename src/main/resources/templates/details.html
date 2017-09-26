@@ -53,9 +53,9 @@
 		<div class="col-sm-8 contentframe">
 			<div class="boardsframe">
 				<div th:object="${user.boards}" th:unless="${list.isEmpty()}">
-					<table>
+					<table id="availableboards">
 						<tr>
-							<td><label>Available boards:</label></td>
+							<td><h3>Available boards:</h3></td>
 						</tr>
 						<tr class="columnnames">
 							<td class="col-sm-2"><label>Board name</label></td>
@@ -65,17 +65,30 @@
 						</tr>
 						<th:block th:each="board : ${list}">
 							<tr class="memberscell">
-								<td class="col-sm-2"><button type="button" class="btn btn-primary" th:text="${board.name}"></button></td>
-								<td class=" col-sm-4"><button type="button" class="btn btn-primary"
-									th:each="member : ${board.members}"
-									th:text="${member.name} + ' '"></button></td>
+								<td class="col-sm-2"><button type="button"
+										class="btn btn-primary" th:text="${board.name}"></button></td>
+								<td class="membersofboard col-sm-4">
+									<div class="btn btn-primary"
+										th:each="member : ${board.members}">
+										<a th:text="${member.name}"
+											th:href="@{'/useroverview/' +${member.name}}">member</a> <img
+											alt="user" th:src="@{'/avatar/'+${member.name}}" width="20"
+											height="20" />
+									</div>
+								</td>
 								<td class="col-sm-3"><label th:text="${board.description}"></label></td>
 								<td class="col-sm-3 ">
-									<form action="" method="POST" th:object="${selectedboard}">
-										<textarea hidden="true" th:field="*{name}"
-											th:text="${board.name}"></textarea>
-										<button type="submit" class="subbutton green">Subscribe</button>
-									</form>
+									<div class="row">
+										<form action="" method="POST" th:object="${selectedboard}">
+											<textarea hidden="true" th:field="*{name}"
+												th:text="${board.name}"></textarea>
+											<button type="submit" class="col-sm-5 subbutton green">Subscribe</button>
+										</form>
+										<div class="col-sm-2"></div>
+										<form method="GET" th:action="@{'/board/' + ${board.name}}">
+											<button type="submit" class="col-sm-5 subbutton green">Visit</button>
+										</form>
+									</div>
 								</td>
 							</tr>
 						</th:block>
@@ -84,9 +97,9 @@
 			</div>
 			<div class="boardsframe">
 				<div th:object="${user}" th:unless="${user.boards.isEmpty()}">
-					<table>
+					<table id="userboards">
 						<tr>
-							<td><label>Your boards:</label></td>
+							<td><h3>Your boards:</h3></td>
 						</tr>
 						<tr class="columnnames ">
 							<td class="col-sm-2"><label>Board name</label></td>
@@ -95,27 +108,28 @@
 							<td class="col-sm-3"><label>Action</label></td>
 						</tr>
 						<tr class=" memberscell" th:each="board : ${user.boards}">
-							<td class="col-sm-2"><button type="button" class="btn btn-primary" th:text="${board.name}"></button></td>
-							<td class=" col-sm-4"><button type="button" class="btn btn-primary"
-									th:each="member : ${board.members}"
-									th:text="${member.name} + ' '"></button></td>
+							<td class="col-sm-2"><button type="button"
+									class="btn btn-primary" th:text="${board.name}"></button></td>
+							<td class="membersofboard col-sm-4">
+								<div class="btn btn-primary" th:each="member : ${board.members}">
+									<a th:text="${member.name}"
+										th:href="@{'/useroverview/' +${member.name}}">member</a> <img
+										alt="user" th:src="@{'/avatar/'+${member.name}}" width="20"
+										height="20" />
+								</div>
+							</td>
 							<td class="col-sm-2"><label th:text="${board.description}"></label>
 							</td>
 							<td class="col-sm-3">
 								<div class="row">
-									<div class="col-sm-5">
-										<form method="POST" th:object="${selectedboard}">
-											<textarea hidden="true" th:field="*{name}"
-												th:text="${board.name}"></textarea>
-											<button type="submit" class="subbutton red">Unsubscribe</button>
-										</form>
-									</div>
-									<div class="col-sm-2"></div>
-									<div class="col-sm-5">
-										<form method="GET" th:action="@{'/board/' + ${board.name}}">
-											<button type="submit" class=" subbutton green">Visit</button>
-										</form>
-									</div>
+									<form action="" method="POST" th:object="${selectedboard}">
+										<textarea hidden="true" th:field="*{name}"
+											th:text="${board.name}"></textarea>
+										<button type="submit" class="col-sm-5 subbutton red">Unsubscribe</button>
+									</form>
+									<form method="GET" th:action="@{'/board/' + ${board.name}}">
+										<button type="submit" class="col-sm-5 subbutton green">Visit</button>
+									</form>
 								</div>
 							</td>
 						</tr>

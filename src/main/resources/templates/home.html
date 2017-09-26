@@ -14,22 +14,14 @@
 	<div>
 		<div class="jumbotron">
 			<div class="container">
-				<div sec:authorize="!isAuthenticated()">
-					<h1>Welcome!</h1>
-				</div>
-				<div sec:authorize="isAuthenticated()">
-					<h1 th:text="'Welcome, ' + ${name}">Welcome!</h1>
+				<div>
+					<h1>Team Calendar</h1>
 				</div>
 			</div>
 		</div>
 		<div>
 			<div th:replace="fragments/navbar :: header">...</div>
 		</div>
-		<!-- 		<div sec:authorize="isAuthenticated()">
-			<p>TEST TEST dupa TEST !!</p>
-		</div>
-		<div sec:authorize="hasAuthority('ADMIN')">This content is only
-			shown to administrators.</div> -->
 		<div class="container" id="headertitle">
 			<div sec:authorize="!isAuthenticated()">
 				<br></br> <br></br>
@@ -40,26 +32,9 @@
 				</h3>
 				<!-- <div class="container" th:replace="fragments/carousel :: carousel">...</div> -->
 			</div>
-			<div sec:authorize="isAuthenticated()">
-				<div class="actions ">
-					<div class="row">
-						<form method="GET" th:action="@{'/user/' + ${name} + '/events'}">
-							<button type="submit" class=" subbutton blue">ADD EVENTS</button>
-						</form>
-					</div>
-					<div class="row">
-						<form method="GET" th:action="@{'/user/' + ${name} + '/details'}">
-							<button type="submit" class=" subbutton blue">ACCOUNT
-								DETAILS</button>
-						</form>
-					</div>
-					<div class="row">
-						<form method="GET" th:action="@{'/board/addboard'}">
-							<button type="submit" class=" subbutton blue">CREATE
-								BOARD</button>
-						</form>
-					</div>
-					<div class="row" sec:authorize="hasAuthority('ADMIN')">
+			<div sec:authorize="isAuthenticated()" >
+				<div class="actions " sec:authorize="hasAuthority('ADMIN')">
+					<div class="row" >
 						<form method="GET" th:action="@{'/adminpanel'}">
 							<button type="submit" class=" subbutton green">ADMIN
 								PANEL</button>

@@ -3,7 +3,6 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-
 <title>Profile update</title>
 <link rel=" stylesheet" type="text/css" href="/css/profile.css" />
 <link rel="stylesheet"
@@ -17,7 +16,6 @@
 	</div>
 	<div th:replace="fragments/navbar :: header">...</div>
 	<div class="container">
-		
 		<form th:object="${user}" method="POST" action="">
 			<div class="row">
 				<textarea hidden="true" th:text="${user.id}" th:field="*{id}">id:</textarea>
@@ -47,11 +45,20 @@
 				</select>
 			</div>
 			<div class="row">
-			<label class="col-sm-2">Remote work location:</label> <input class="col-sm-10"
-					th:field="*{remoteWorkLocation}" />
+				<label class="col-sm-2">Remote work location:</label> <input
+					class="col-sm-10" th:field="*{remoteWorkLocation}" />
 			</div>
 			<div class="row">
-				<button type="submit" class="subbutton red">Submit</button>
+				<label class="col-sm-2">Room:</label> <input class="col-sm-10"
+					th:field="*{room}" />
+			</div>
+			<div class="row">
+				<label class="col-sm-2">Phone number:</label> <input
+					class="col-sm-10" th:field="*{phone}" />
+			</div>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<button type="submit" class="col-sm-10 subbutton red">Submit</button>
 			</div>
 		</form>
 	</div>

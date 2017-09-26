@@ -4,6 +4,7 @@ package common.repository;
 import java.util.List;
 
 import org.joda.time.LocalDate;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import common.entities.Event;
 
@@ -21,4 +22,7 @@ interface EventRepository extends CrudRepository<Event, Long>{
 	void deleteByDate(List<LocalDate> dates);
 	
 	void deleteByDate(LocalDate date);
+	
+	@Query("select e from Event e where e.date <= ?")
+	List<Event> findByDateLessThan(LocalDate date);
 }

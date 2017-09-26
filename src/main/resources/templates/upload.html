@@ -10,7 +10,7 @@ function getName(){ // update label with name of choosen file
 	var filepath = document.getElementById('file-upload').value;
 	var name = filepath.split(/(\\|\/)/g).pop();
 	document.getElementById('file-upload-label').innerHTML=name;
-	document.getElementById('file-upload-label').color = "green";
+	document.getElementById('file-upload-label').style.backgroundColor = "green";
 	}
 </script>
 <link rel="stylesheet"

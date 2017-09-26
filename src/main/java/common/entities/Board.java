@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Board {
 
@@ -23,6 +25,7 @@ public class Board {
 	private String owner;
 
 	@ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL)
+	//@JsonIgnore
 	List<User> members = new ArrayList<User>();
 
 	public Board(String name) {

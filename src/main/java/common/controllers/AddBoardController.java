@@ -17,6 +17,7 @@ import common.entities.Board;
 import common.entities.User;
 import common.entities.dto.BoardDto;
 import common.repository.BoardService;
+import common.repository.SecurityService;
 import common.repository.UserService;
 
 @Controller
@@ -26,6 +27,9 @@ public class AddBoardController {
 	private BoardService boardService;
 
 	@Autowired
+	private SecurityService securityService;
+	
+	@Autowired
 	private UserService userService;
 
 	@RequestMapping(value = "/board/addboard", method = RequestMethod.GET)
@@ -33,21 +37,23 @@ public class AddBoardController {
 
 		BoardDto newBoardDto = new BoardDto();
 		model.addAttribute("owner", userService.findByName(principal.getName()).getUsername());
+		model.addAttribute("name", securityService.getCurrentUserName(principal));
 		model.addAttribute("board", newBoardDto);
 
 		return "addboard";
 	}
 
 	@RequestMapping(value = "/board/addboard", method = RequestMethod.POST)
-	public ModelAndView addBoard(@ModelAttribute("board") @Valid BoardDto boardDto,
-			BindingResult bindingResult) {
+	public ModelAndView addBoard(@ModelAttribute("board") @Valid BoardDto boardDto, BindingResult bindingResult) {
 		Board createdBoard;
+		System.out.println("board:" + boardDto.toString());
 		if (!bindingResult.hasErrors()) {
-			createdBoard = boardService.createBoard(boardDto);
+			createdBoard = boardService.getBoardFromBoardDto(boardDto);
+			System.out.println(createdBoard.toString());
+			boardService.save(createdBoard);
 			User user = userService.findByName(createdBoard.getOwner());
 			user.addBoardToList(createdBoard);
 			userService.update(user);
-
 		}
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("addboard", "board", boardDto);

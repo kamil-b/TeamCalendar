@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+<link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+<link rel="stylesheet" type="text/css" href="/css/useroverview.css" />
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<div>
+				<h1 th:text="${user.name}"></h1>
+				<h2>Profile overview</h2>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div th:replace="fragments/navbar :: header">...</div>
+	</div>
+	<div class="container">
+		<div class="userinfo">
+			<div class="col-sm-2">
+				<img alt="user" th:src="@{'/avatar/'+${user.name}}" width="160"
+					height="160" />
+			</div>
+			<div class="row">
+				<div class="col-sm-5">
+					<table th:object="${user}">
+						<tr class="row">
+							<td class="cols-m-2 rowname"><label>Name:</label></td>
+							<td class="cols-m-2"><label th:text="*{name}"></label></td>
+						</tr>
+						<tr class="row">
+							<td class="cols-m-2 rowname"><label>Email:</label></td>
+							<td class="cols-m-2"><label th:text="*{email}"></label></td>
+						</tr>
+						<tr class="row">
+							<td class="cols-m-2 rowname"><label>Phone number:</label></td>
+							<td class="cols-m-2"><label th:text="*{phone}"></label></td>
+						</tr>
+						<tr class="row">
+							<td class="cols-m-2 rowname"><label>Room:</label></td>
+							<td class="cols-m-2"><label th:text="*{room}"></label></td>
+						</tr>
+						<tr class="row">
+							<td class="cols-m-2 rowname"><label>Position:</label></td>
+							<td class="cols-m-2"><label th:text="*{role}"></label></td>
+						</tr>
+						<tr class="row">
+							<td class="cols-m-2 rowname"><label>Member of :</label></td>
+							<td class="cols-m-4"><label class="btn btn-primary"
+								th:each="b : ${user.boards}" th:text="${b.name}"></label></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<div th:each="event : ${events}" class="weekevents col-sm-2">
+					<label th:text="${event.date}">event</label> <label
+						th:classappend="'event-' + ${event.eventType}"
+						th:text="${event.eventType}">event</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -19,20 +19,19 @@
 	</div>
 	<div th:replace="fragments/navbar :: header">...</div>
 	<div class="container">
-		<!-- 	<div>
-			<form th:each="board : ${boardList}" th:object="${removedBoard}"
+	<!-- 	<div>
+			<form th:object="${removedBoard}" th:each="board : ${boardList}" 
 				method="POST" action="">
 				<table>
 					<tr>
 						<td th:text="${board.name}">Name of board</td>
-						<td><textarea th:value="${board.name}" hidden="true"
-								th:name="*{removedBoard}"></textarea></td>
-						<td th:text="${board.description}" th:field="*{description}">description</td>
+						<td><textarea th:text="${board.name}" 
+								th:field="*{name}"></textarea></td>
 						<td><button type="submit">Remove</button></td>
 					</tr>
 				</table>
 			</form>
-		</div> -->
+		</div>  -->
 		<div>
 			<table>
 				<tr class="row">

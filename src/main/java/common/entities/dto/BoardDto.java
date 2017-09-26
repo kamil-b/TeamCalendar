@@ -17,7 +17,7 @@ public class BoardDto {
 	@Column(unique=true)
 	private String name;
 	
-	
+	private Long id;
 	private List<User> members = new ArrayList<User>();
 	
 	@NotEmpty
@@ -58,6 +58,14 @@ public class BoardDto {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override

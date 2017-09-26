@@ -75,3 +75,18 @@ label {
 table {
     width: 100%;
 }
+
+.membersofboard>div>a {
+    color: white;
+}
+
+.useroverviewbutton {
+    width: 100%;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    text-align: left;
+}

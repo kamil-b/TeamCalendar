@@ -4,6 +4,9 @@
   border-color: none;
   margin-bottom: 0px; }
 
+nav li:hover {
+  background-color: #3894f5; }
+
 .navbar-inverse .navbar-nav > li > a {
   color: white; }
 
@@ -11,4 +14,4 @@
   color: white; }
 
 .navbar-inverse {
-  border-bottom-color: #003366; }
+  border-style: none; }
