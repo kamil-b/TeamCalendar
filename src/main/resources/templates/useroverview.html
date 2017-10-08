@@ -14,7 +14,6 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div>
-				<h1 th:text="${user.name}"></h1>
 				<h2>Profile overview</h2>
 			</div>
 		</div>
@@ -24,6 +23,9 @@
 	</div>
 	<div class="container">
 		<div class="userinfo">
+			<div class="row titlebar">
+				<label>USER INFORMATION: </label>
+			</div>
 			<div class="col-sm-2">
 				<img alt="user" th:src="@{'/avatar/'+${user.name}}" width="160"
 					height="160" />
@@ -59,12 +61,34 @@
 					</table>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row userinfo">
+				<div class="col-sm-12 titlebar">
+					<label>UPCOMMING EVENTS: </label>
+				</div>
 				<div th:each="event : ${events}" class="weekevents col-sm-2">
 					<label th:text="${event.date}">event</label> <label
 						th:classappend="'event-' + ${event.eventType}"
 						th:text="${event.eventType}">event</label>
 				</div>
+			</div>
+			<div class="row userinfo">
+				<div class="col-sm-12 titlebar">
+					<label>EVENTS STATISTICS: </label>
+				</div>
+				<table class="statisticstable">
+					<tr class="row">
+						<td class="col-sm-2 titlebar"><label>MONTH</label></td>
+						<td class="col-sm-2 titlebar" th:each="type : ${eventTypes}"><label
+							th:text="${type}"></label></td>
+					</tr>
+					<tr class="row" th:each=" monthData : ${statistics}">
+						<td class="titlebar"><label
+							th:text="${monthData.getMonth(monthData.month) + ' ' + monthData.year}"></label></td>
+						<td class="col-sm-2"
+							th:each="eventCount : ${monthData.eventsCountedByType}"><label
+							th:text="${eventCount.getValue()}"></label></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>

@@ -43,6 +43,7 @@
 
 .userinfo {
   padding-top: 30px;
+  padding-bottom: 10px;
   font-size: 16px; }
 
 label {
@@ -55,7 +56,24 @@ label {
   padding-bottom: 10px; }
 
 .rowname {
-  margin-right: 10px; }
+  padding-right: 30px; }
 
 .rowname > label {
   color: #23527c; }
+
+.statistics_table > tr {
+  text-align: center; }
+
+.titlebar {
+  color: white;
+  background-color: #003366; }
+
+.titlebar > label {
+  color: white;
+  background-color: #003366; }
+
+.statisticstable {
+  width: 100%; }
+
+.statisticstable tr td {
+  text-align: center; }

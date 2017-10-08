@@ -13,9 +13,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import common.entities.Event;
-
+/**
+ * just for learning purposes
+ */
 @Service
 @EnableScheduling
+@Deprecated
 public class CleanupService {
 	private static final int WEEK_BEFORE = 7;
 	private static final int ONE_DAY_BEFORE = 1;
@@ -24,7 +27,7 @@ public class CleanupService {
 	private EventRepository eventRepository;
 
 	 //@Scheduled(cron = "*/60 * * * * *") // each minute : for testing
-	@Scheduled(cron = "0 0 * * 7 *") // each Sunday at midnight
+	//@Scheduled(cron = "0 0 * * 7 *") // each Sunday at midnight
 	private void cleanupOldEvents() {
 		logger.info("Starting cleaning process for old events...");
 		LocalDate now = new LocalDate();

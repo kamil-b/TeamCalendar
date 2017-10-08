@@ -17,11 +17,10 @@ import common.repository.UserService;
 public class HomeController {
 
 	@Autowired
-	BoardService boardService;
+	private BoardService boardService;
+
 	@Autowired
-	UserService userService;
-	@Autowired
-	SecurityService securityService;
+	private SecurityService securityService;
 
 	@RequestMapping(value = { "", "/", "/home" }, method = RequestMethod.GET)
 	public String showHome(Principal principal, Model model) {

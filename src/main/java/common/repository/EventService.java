@@ -38,8 +38,13 @@ public class EventService {
 		return getAllEventsForUser(user.getUsername());
 	}
 
+	/**
+	 * Return list of events for specific user. Sorted from the oldest to newest.
+	 * @param username
+	 * @return list of events 
+	 */
 	public List<Event> getAllEventsForUser(String username) {
-		return eventRepository.findByUsername(userService.findByName(username).getUsername());
+		return eventRepository.findByUsernameOrderByDateAsc(userService.findByName(username).getUsername());
 	}
 
 	public boolean isWeekend(LocalDate date) {
@@ -75,7 +80,7 @@ public class EventService {
 		IntStream.range(0, numberOfDays).forEach(i -> eventsInNextDays.put(date.plusDays(i),
 				new Event(username, date.plusDays(i), EventType.NO_EVENT)));
 
-		events = eventRepository.findByUsername(userService.findByName(username).getUsername());
+		events = eventRepository.findByUsernameOrderByDateAsc(userService.findByName(username).getUsername());
 
 		for (Event event : events) {
 			LocalDate day = event.getDate();
@@ -181,7 +186,7 @@ public class EventService {
 		List<Event> events = new ArrayList<>();
 
 		for (User user : users) {
-			events.addAll(eventRepository.findByUsername(user.getName()));
+			events.addAll(eventRepository.findByUsernameOrderByDateAsc(user.getName()));
 		}
 		return events;
 	}

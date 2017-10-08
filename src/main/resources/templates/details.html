@@ -65,12 +65,13 @@
 						</tr>
 						<th:block th:each="board : ${list}">
 							<tr class="memberscell">
-								<td class="col-sm-2"><button type="button"
-										class="btn btn-primary" th:text="${board.name}"></button></td>
+								<td class="col-sm-2"><a type="button"
+									class="btn btn-primary" th:text="${board.name}"
+									th:href="@{'/board/' + ${board.name}}"></a></td>
 								<td class="membersofboard col-sm-4">
 									<div class="btn btn-primary"
 										th:each="member : ${board.members}">
-										<a th:text="${member.name}"
+										<a th:text="${member.name}" type="button"
 											th:href="@{'/useroverview/' +${member.name}}">member</a> <img
 											alt="user" th:src="@{'/avatar/'+${member.name}}" width="20"
 											height="20" />
@@ -108,8 +109,9 @@
 							<td class="col-sm-3"><label>Action</label></td>
 						</tr>
 						<tr class=" memberscell" th:each="board : ${user.boards}">
-							<td class="col-sm-2"><button type="button"
-									class="btn btn-primary" th:text="${board.name}"></button></td>
+							<td class="col-sm-2"><a type="button"
+								class="btn btn-primary" th:text="${board.name}"
+								th:href="@{'/board/' + ${board.name}}"></a></td>
 							<td class="membersofboard col-sm-4">
 								<div class="btn btn-primary" th:each="member : ${board.members}">
 									<a th:text="${member.name}"
