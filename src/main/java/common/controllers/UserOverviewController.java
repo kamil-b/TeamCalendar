@@ -52,7 +52,7 @@ public class UserOverviewController {
 		Map<String, EventsInMonth> eventsMap = new TreeMap<>();
 		for (Event e : allEventsForUser) {
 			eventsMap.compute(e.getDate().getMonthOfYear() + " " + e.getDate().getYear(),
-					(k, v) -> v == null ? new EventsInMonth(e.getDate()) : v.addEvent(e));
+					(k, v) -> v == null ? new EventsInMonth(e.getDate(), e) : v.addEvent(e));
 		}
 		for (EventsInMonth ev : eventsMap.values()) {
 			ev.countEventsByType();
@@ -62,7 +62,8 @@ public class UserOverviewController {
 				new ArrayList<>(eventService.getAllEventsForUserForNextDays(userDto.getName(), 5).values()));
 		return new ModelAndView("useroverview").addObject("user", userDto).addObject("events", events)
 				.addObject("name", securityService.getCurrentUserName(principal))
-				.addObject("statistics", eventsMap.values()).addObject("eventTypes", EventType.values());
+				.addObject("statistics", eventsMap.values()).addObject("eventTypes",
+						eventsMap.entrySet().iterator().next().getValue().getEventsCountedByType().keySet());
 
 	}
 

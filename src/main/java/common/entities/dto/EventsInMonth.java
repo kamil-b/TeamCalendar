@@ -20,10 +20,11 @@ public class EventsInMonth {
 	private List<Event> events;
 	private Map<EventType, Integer> eventsCountedByType;
 
-	public EventsInMonth(LocalDate date) {
+	public EventsInMonth(LocalDate date, Event event) {
 		this.month = date.getMonthOfYear();
 		this.year = date.getYear();
 		this.events = new ArrayList<>();
+		this.events.add(event);
 		this.eventsCountedByType = new HashMap<>();
 	}
 
@@ -71,11 +72,11 @@ public class EventsInMonth {
 
 	@Override
 	public String toString() {
-		return "EventsInMonth [month=" + month + ", year=" + year + ", events=" + events + "]";
+		return "EventsInMonth [month=" + month + ", year=" + year + ", locale=" + locale + ", events=" + events
+				+ ", eventsCountedByType=" + eventsCountedByType + "]";
 	}
 
-	
 	public String getMonth(int month) {
-	    return new DateFormatSymbols(locale).getShortMonths()[month-1];
+		return new DateFormatSymbols(locale).getShortMonths()[month - 1];
 	}
 }

@@ -55,8 +55,9 @@
 						</tr>
 						<tr class="row">
 							<td class="cols-m-2 rowname"><label>Member of :</label></td>
-							<td class="cols-m-4"><label class="btn btn-primary"
-								th:each="b : ${user.boards}" th:text="${b.name}"></label></td>
+							<td class="cols-m-4"><a class="btn btn-primary"
+								th:each="b : ${user.boards}" th:text="${b.name}"
+								th:href="@{'/board/' + ${b.name}}"></a></td>
 						</tr>
 					</table>
 				</div>
