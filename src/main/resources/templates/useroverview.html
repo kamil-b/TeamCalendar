@@ -77,7 +77,7 @@
 					<label>EVENTS STATISTICS: </label>
 				</div>
 				<table class="statisticstable">
-					<tr class="row">
+					<tr class="row titlebar">
 						<td class="col-sm-2 titlebar"><label>MONTH</label></td>
 						<td class="col-sm-2 titlebar" th:each="type : ${eventTypes}"><label
 							th:text="${type}"></label></td>
@@ -88,6 +88,7 @@
 						<td class="col-sm-2"
 							th:each="eventCount : ${monthData.eventsCountedByType}"><label
 							th:text="${eventCount.getValue()}"></label></td>
+							<td class="col-sm-2"></td>
 					</tr>
 				</table>
 			</div>

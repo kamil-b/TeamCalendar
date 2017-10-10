@@ -54,8 +54,8 @@
 			<div class="boardsframe">
 				<div th:object="${user.boards}" th:unless="${list.isEmpty()}">
 					<table id="availableboards">
-						<tr>
-							<td><h3>Available boards:</h3></td>
+						<tr >
+							<td><label>Available boards:</label></td>
 						</tr>
 						<tr class="columnnames">
 							<td class="col-sm-2"><label>Board name</label></td>
@@ -100,7 +100,7 @@
 				<div th:object="${user}" th:unless="${user.boards.isEmpty()}">
 					<table id="userboards">
 						<tr>
-							<td><h3>Your boards:</h3></td>
+							<td><label>Your boards:</label></td>
 						</tr>
 						<tr class="columnnames ">
 							<td class="col-sm-2"><label>Board name</label></td>

@@ -19,7 +19,7 @@
 					<a class="navbar-brand" th:href="@{/home}">TeamCalendar</a>
 				</div>
 				<ul sec:authorize="isAuthenticated()" class="nav navbar-nav">
-					<li><a th:href="@{'/user/' + ${name} + '/events'}">Add
+					<li><a th:href="@{'/user/' + ${#authentication.name} + '/events'}">Add
 							Events</a></li>
 					<li><a th:href="@{'/board/addboard'}">Create new board</a></li>
 				</ul>

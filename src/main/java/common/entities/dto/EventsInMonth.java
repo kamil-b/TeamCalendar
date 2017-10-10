@@ -36,6 +36,7 @@ public class EventsInMonth {
 		for (Event e : events) {
 			eventsByTypes.compute(e.getEventType(), (k, v) -> (v == 0) ? 1 : (v = v + 1));
 		}
+		eventsByTypes.remove(EventType.NO_EVENT);
 		eventsCountedByType.putAll(eventsByTypes);
 
 	}

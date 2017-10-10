@@ -36,11 +36,11 @@
 				<div class="actions " sec:authorize="hasAuthority('ADMIN')">
 					<div class="row" >
 						<form method="GET" th:action="@{'/adminpanel'}">
-							<button type="submit" class=" subbutton green">ADMIN
+							<button type="submit" class=" subbutton blue">ADMIN
 								PANEL</button>
 						</form>
 						<form method="GET" th:action="@{'/console'}">
-							<button type="submit" class=" subbutton green">DATABASE
+							<button type="submit" class=" subbutton blue">DATABASE
 								CONSOLE</button>
 						</form>
 					</div>
@@ -51,7 +51,7 @@
 				<div th:each="board : ${boards}">
 					<form class="col-sm-3" method="GET"
 						th:action="@{'/board/' + ${board.name}}">
-						<button type="submit" class=" subbutton green"
+						<button type="submit" class=" subbutton blue"
 							th:text="${board.name}"></button>
 					</form>
 				</div>
