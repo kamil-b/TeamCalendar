@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.security.Principal;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.tomcat.util.http.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +30,10 @@ import common.repository.UserService;
 public class UploadController {
 
 	private final static Logger logger = LoggerFactory.getLogger(UploadController.class);
-	private static final String PROJECT_PATH = "\\src\\main\\resources\\static\\images\\";
-	private static final String DEFAULT_AVATAR_PATH = System.getProperty("user.dir") + PROJECT_PATH + "user.png";
+	private static final String PROJECT_PATH_WINDOWS = "\\src\\main\\resources\\static\\images\\";
+	private static final String PROJECT_PATH_LINUX = "/src/main/resources/static/images/";
+	private static final String DEFAULT_AVATAR_PATH = System.getProperty("user.dir")
+			+ (SystemUtils.IS_OS_WINDOWS == true ? PROJECT_PATH_WINDOWS : PROJECT_PATH_LINUX) + "user.png";
 
 	@Autowired
 	private UserService userService;
@@ -46,7 +49,8 @@ public class UploadController {
 			Principal principal) {
 
 		if (file.isEmpty()) {
-			redirectAttributes.addFlashAttribute("message", "Nothing to upload. Please select an image.").addFlashAttribute("success", false);
+			redirectAttributes.addFlashAttribute("message", "Nothing to upload. Please select an image.")
+					.addFlashAttribute("success", false);
 			return "redirect:/upload";
 		}
 
@@ -56,9 +60,9 @@ public class UploadController {
 			user.setImage(bytes);
 			userService.update(user);
 
-			redirectAttributes.addFlashAttribute("message", "You successfully uploaded avatar icon").addFlashAttribute("success", true);
-		}
-		catch (IOException e) {
+			redirectAttributes.addFlashAttribute("message", "You successfully uploaded avatar icon")
+					.addFlashAttribute("success", true);
+		} catch (IOException e) {
 			logger.error("There was error uploading avatar icon: ", e);
 		}
 
