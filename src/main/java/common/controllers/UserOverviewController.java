@@ -2,11 +2,14 @@ package common.controllers;
 
 import java.security.Principal;
 import java.util.ArrayList;
-
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +52,7 @@ public class UserOverviewController {
 		}
 
 		List<Event> allEventsForUser = eventService.getAllEventsForUser(userDto.getName());
-		Map<String, EventsInMonth> eventsMap = new TreeMap<>();
+		Map<String, EventsInMonth> eventsMap = new TreeMap<>(monthsComparator);
 		for (Event e : allEventsForUser) {
 			eventsMap.compute(e.getDate().getMonthOfYear() + " " + e.getDate().getYear(),
 					(k, v) -> v == null ? new EventsInMonth(e.getDate(), e) : v.addEvent(e));
@@ -64,7 +67,27 @@ public class UserOverviewController {
 				.addObject("name", securityService.getCurrentUserName(principal))
 				.addObject("statistics", eventsMap.values()).addObject("eventTypes",
 						eventsMap.entrySet().iterator().next().getValue().getEventsCountedByType().keySet());
-
 	}
+
+	private Comparator<String> monthsComparator = new Comparator<String>() {
+
+		@Override
+		public int compare(String o1, String o2) {
+			DateTimeFormatter formatter = DateTimeFormat.forPattern("MM yyyy");
+			LocalDate o1Date = formatter.parseLocalDate(o1);
+			LocalDate o2Date = formatter.parseLocalDate(o2);
+			System.out.println(o1Date.toString() + "  " + o2Date.toString());
+			o1.compareTo(o2);
+			if (o1Date.isBefore(o2Date)) {
+				return 1;
+			} else if (o1Date.isAfter(o2Date)) {
+				return -1;
+			} else {
+				return 0;
+			}
+			// return o1Date.isBefore(o2Date) ? 1: -1;
+		}
+
+	};
 
 }
