@@ -3,12 +3,13 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<title>Insert title here</title>
+<title>Create new board</title>
 <link rel="stylesheet" type="text/css" href="/css/addboard.css" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
 <link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="jumbotron">
@@ -17,27 +18,33 @@
 		</div>
 	</div>
 	<div th:replace="fragments/navbar :: header">...</div>
+	<div class="container" th:if="${error != null}">
+		<div class="row" >
+			<label class="alert alert-danger alert-dismissable fade in close"
+				th:text="${error}" data-dismiss="alert" aria-label="close">
+			</label>
+		</div>
+	</div>
 	<div class="container registrationform">
 		<form action="" method="POST" th:object="${board}">
 			<div class="inputrow">
-				<label> Owner:</label>
-				<select th:field="${board.ownerName}" >
+				<label> Owner:</label> <select th:field="${board.ownerName}">
 					<option th:value="${owner}" th:text="${owner}"></option>
-				</select> <label class=" error"
+				</select> <label 
 					th:each="error : ${#fields.errors('ownerName')}" th:text="${error}">Validation
 					error</label>
 			</div>
 			<div class="inputrow">
-			<label> Board name:</label>
-				<input th:field="${board.name}" placeholder="board name" /> <label
-					class=" error" th:each="error : ${#fields.errors('name')}"
-					th:text="${error}">Validation error</label>
+				<label> Board name:</label> <input th:field="${board.name}"
+					placeholder="board name" /> <label 
+					th:each="error : ${#fields.errors('name')}" th:text="${error}">Validation
+					error</label>
 			</div>
 			<div class="inputrow">
-			<label> Description:</label>
+				<label> Description:</label>
 				<textarea rows="5" th:field="${board.description}"
 					placeholder="short information about creating board"></textarea>
-				<label class=" error"
+				<label 
 					th:each="error : ${#fields.errors('description')}"
 					th:text="${error}">Validation error</label>
 			</div>

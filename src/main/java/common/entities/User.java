@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,8 @@ public class User implements UserDetails {
 	private String name;
 	private String password;
 
-	@ManyToMany(targetEntity = Board.class, cascade = CascadeType.ALL)
+	@ManyToMany(targetEntity = Board.class, cascade = {
+			CascadeType.PERSIST, CascadeType.DETACH,CascadeType.REFRESH })
 	private List<Board> boards = new ArrayList<Board>();
 	private String email;
 	private JobRole role;
@@ -175,7 +177,7 @@ public class User implements UserDetails {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}

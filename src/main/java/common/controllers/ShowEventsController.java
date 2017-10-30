@@ -65,7 +65,11 @@ public class ShowEventsController {
 		EventDtoListForm changedEventForm = new EventDtoListForm();
 		changedEventForm.setEventslist(
 				eventService.getChangedEventsDto(this.eventForm.getEventslist(), eventForm.getEventslist()));
-
+		
+		if (changedEventForm.getEventslist().isEmpty()) {
+			redirectAttributes.addFlashAttribute("error", "Please mark any event first");
+			return "redirect:/user/" + name + "/events";
+		}
 		redirectAttributes.addFlashAttribute("eventForm", changedEventForm);
 		return "redirect:addevents";
 

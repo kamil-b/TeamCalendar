@@ -9,6 +9,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
 <link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Events</title>
 </head>
 <body>
@@ -20,6 +24,13 @@
 	<div th:replace="fragments/navbar :: header">...</div>
 	<div class="container">
 		<div>
+			<div class="row" th:if="${error != null}">
+			<div class="col-sm-10">
+				<label class="alert alert-danger alert-dismissable fade in close"
+					th:text="${error}" data-dismiss="alert" aria-label="close">
+				</label>
+				</div>
+			</div>
 			<form action="" method="POST" th:object="${eventForm}">
 				<div class="row">
 					<div class="col-sm-10 nopadding">
@@ -76,6 +87,5 @@
 			</form>
 		</div>
 	</div>
-	<div class="footer"></div>
 </body>
 </html>

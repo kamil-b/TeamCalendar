@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,8 +27,8 @@ public class Board {
 
 	private String owner;
 
-	@ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL)
-	//@JsonIgnore
+	@ManyToMany(targetEntity = User.class,  cascade = {
+			CascadeType.PERSIST, CascadeType.DETACH,CascadeType.REFRESH })
 	List<User> members = new ArrayList<User>();
 
 	public Board(String name) {
@@ -75,6 +78,14 @@ public class Board {
 
 	public void removeUserFromBoard(User user) {
 		members.remove(user);
+	}	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override

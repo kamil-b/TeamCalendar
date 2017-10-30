@@ -1,12 +1,16 @@
 package common.repository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.IntStream;
 
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,8 @@ import org.springframework.stereotype.Service;
 import common.entities.Event;
 import common.entities.User;
 import common.entities.dto.EventDto;
+import common.entities.dto.EventsInMonth;
+import common.entities.dto.UserDto;
 import common.entities.enums.EventType;
 
 @Service
@@ -39,9 +45,11 @@ public class EventService {
 	}
 
 	/**
-	 * Return list of events for specific user. Sorted from the oldest to newest.
+	 * Return list of events for specific user. Sorted from the oldest to
+	 * newest.
+	 * 
 	 * @param username
-	 * @return list of events 
+	 * @return list of events
 	 */
 	public List<Event> getAllEventsForUser(String username) {
 		return eventRepository.findByUsernameOrderByDateAsc(userService.findByName(username).getUsername());
@@ -77,8 +85,8 @@ public class EventService {
 		LocalDate date = new LocalDate(LocalDate.now());
 		Map<LocalDate, Event> eventsInNextDays = new LinkedHashMap<LocalDate, Event>();
 		List<Event> events;
-		IntStream.range(0, numberOfDays).forEach(i -> eventsInNextDays.put(date.plusDays(i),
-				new Event(username, date.plusDays(i), EventType.NO_EVENT)));
+		IntStream.range(0, numberOfDays).forEach(
+				i -> eventsInNextDays.put(date.plusDays(i), new Event(username, date.plusDays(i), EventType.NO_EVENT)));
 
 		events = eventRepository.findByUsernameOrderByDateAsc(userService.findByName(username).getUsername());
 
@@ -190,5 +198,37 @@ public class EventService {
 		}
 		return events;
 	}
+
+	public Map<String, EventsInMonth> getEventsInMonths(String username) {
+		List<Event> allEventsForUser = getAllEventsForUser(username);
+		Map<String, EventsInMonth> eventsMap = new TreeMap<>(this.monthsComparator);
+		for (Event e : allEventsForUser) {
+			eventsMap.compute(e.getDate().getMonthOfYear() + " " + e.getDate().getYear(),
+					(k, v) -> v == null ? new EventsInMonth(e.getDate(), e) : v.addEvent(e));
+		}
+		for (EventsInMonth ev : eventsMap.values()) {
+			ev.countEventsByType();
+		}
+
+		return eventsMap;
+	}
+
+	private Comparator<String> monthsComparator = new Comparator<String>() {
+
+		@Override
+		public int compare(String s1, String s2) {
+			DateTimeFormatter formatter = DateTimeFormat.forPattern("MM yyyy");
+			LocalDate s1Date = formatter.parseLocalDate(s1);
+			LocalDate s2Date = formatter.parseLocalDate(s2);
+			if (s1Date.isBefore(s2Date)) {
+				return 1;
+			} else if (s1Date.isAfter(s2Date)) {
+				return -1;
+			} else {
+				return 0;
+			}
+		}
+
+	};
 
 }

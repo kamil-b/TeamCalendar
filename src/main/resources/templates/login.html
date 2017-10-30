@@ -3,10 +3,15 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
+<title>Login</title>
 <link rel=" stylesheet" type="text/css" href="/css/login.css" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Login</title>
 </head>
 <body>
@@ -14,12 +19,13 @@
 		<div th:replace="fragments/navbar :: header">...</div>
 	</div>
 	<div class="logincontainer">
-		<div class="error" th:if="${param.error}">
-			<span class="glyphicon glyphicon-exclamation-sign"></span>
-			<p>Invalid username or password.</p>
-		</div>
 		<div th:if="${param.logout}">You have been logged out.</div>
 		<div class="register-form">
+			<div class="row" th:if="${param.error}">
+				<label class="alert alert-danger alert-dismissable fade in close"
+					data-dismiss="alert" aria-label="close">Invalid username or
+					password.</label>
+			</div>
 			<form th:action="@{/login}" method="post">
 				<div>
 					<div class="inputcontainer">
@@ -30,7 +36,8 @@
 						<input placeholder="password" type="password" name="password" />
 					</div>
 					<div>
-						<input id="login_button" class="subbutton red" type="submit" value="Sign In" />
+						<input id="login_button" class="subbutton red" type="submit"
+							value="Sign In" />
 					</div>
 					<div class="messagecontainer">
 						<p>
@@ -45,5 +52,6 @@
 			</form>
 		</div>
 	</div>
+	<div th:replace="fragments/navbar :: footer">...</div>
 </body>
 </html>

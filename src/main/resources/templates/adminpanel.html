@@ -19,20 +19,33 @@
 	</div>
 	<div th:replace="fragments/navbar :: header">...</div>
 	<div class="container">
-	<!-- 	<div>
-			<form th:object="${removedBoard}" th:each="board : ${boardList}" 
-				method="POST" action="">
+		<div th:each="board : ${boardList}" class="board col-sm-5">
+			<div class="boardname" th:text="${board.name}"></div>
+			<form th:object="${updated}" method="POST" action="">
+				<div>
+					<textarea hidden="true" th:text="${board.id}" th:field="*{boardId}"></textarea>
+				</div>
+				<div>
+					<textarea hidden="true" th:text="${board.name}"
+						th:field="*{boardName}"></textarea>
+				</div>
 				<table>
-					<tr>
-						<td th:text="${board.name}">Name of board</td>
-						<td><textarea th:text="${board.name}" 
-								th:field="*{name}"></textarea></td>
-						<td><button type="submit">Remove</button></td>
+					<tr>Members:
+					</tr>
+					<tr th:each="member : ${board.members}">
+						<td class="col-sm-2" th:text="${member.name}">Member name</td>
+						<td>
+						<textarea hidden="true" th:text="${member.name}" th:field="*{memberName}"></textarea> 
+						<textarea hidden="true" th:text="${member.id}" th:field="*{memberId}"></textarea>
+						</td>
+						<td class="col-sm-2"><button class="subbutton red"
+								type="submit">Unassigne</button></td>
+						<td class="col-sm-8"></td>
 					</tr>
 				</table>
 			</form>
-		</div>  -->
-		<div>
+		</div>
+		<!-- <div>
 			<table>
 				<tr class="row">
 					<td class="col-sm-1"></td>
@@ -62,7 +75,7 @@
 					</tr>
 				</table>
 			</form>
-		</div>
+		</div> -->
 	</div>
 </body>
 </html>

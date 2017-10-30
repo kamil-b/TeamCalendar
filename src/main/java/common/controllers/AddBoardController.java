@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import common.entities.Board;
 import common.entities.User;
@@ -28,7 +29,7 @@ public class AddBoardController {
 
 	@Autowired
 	private SecurityService securityService;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -44,21 +45,26 @@ public class AddBoardController {
 	}
 
 	@RequestMapping(value = "/board/addboard", method = RequestMethod.POST)
-	public ModelAndView addBoard(@ModelAttribute("board") @Valid BoardDto boardDto, BindingResult bindingResult) {
-		Board createdBoard;
-		System.out.println("board:" + boardDto.toString());
+	public String addBoard(@ModelAttribute("board") @Valid BoardDto boardDto, BindingResult bindingResult, Model model,
+			RedirectAttributes attributes) {
+
+		if (boardService.findByName(boardDto.getName()) != null) {
+			attributes.addFlashAttribute("error", "Board name allready taken");
+			return "redirect:/board/addboard";
+		}
+
 		if (!bindingResult.hasErrors()) {
-			createdBoard = boardService.getBoardFromBoardDto(boardDto);
-			System.out.println(createdBoard.toString());
+			Board createdBoard = boardService.getBoardFromBoardDto(boardDto);
 			boardService.save(createdBoard);
 			User user = userService.findByName(createdBoard.getOwner());
 			user.addBoardToList(createdBoard);
 			userService.update(user);
 		}
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView("addboard", "board", boardDto);
+			model.addAttribute("board", boardDto);
+			return "redirect:/board/addboard";
 		} else {
-			return new ModelAndView("redirect:/home");
+			return "redirect:/home";
 		}
 	}
 }

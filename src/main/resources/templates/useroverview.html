@@ -8,6 +8,8 @@
 <link rel="stylesheet" type="text/css" href="/css/navbar.css" />
 <link rel="stylesheet" type="text/css" href="/css/jumbotron.css" />
 <link rel="stylesheet" type="text/css" href="/css/useroverview.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -88,11 +90,39 @@
 						<td class="col-sm-2"
 							th:each="eventCount : ${monthData.eventsCountedByType}"><label
 							th:text="${eventCount.getValue()}"></label></td>
-							<td class="col-sm-2"></td>
+						<td class="col-sm-2"></td>
 					</tr>
 				</table>
 			</div>
+			<!-- 			<div class="row userinfo" ng-app="SortedTable"
+				ng:controller="SortableTableController">
+				<div class="col-sm-12 titlebar">
+				<label>EVENTS STATISTICS: </label>
+				</div>
+				<table class="statisticstable">
+					<thead class="col-sm-12 titlebar">
+						<tr>
+							<th ng:repeat="(key,value) in body.eventsCountedByType"><label>{{key}}</label></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng:repeat="row in body">
+							<td ng:repeat="(key , value) in row.eventsCountedByType"><span>
+									{{value}}</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div> -->
 		</div>
 	</div>
+	<!-- 	<script>
+		var app = angular.module("SortedTable", []);
+		app.controller("SortableTableController", function($scope, $http) {
+			var result = $http.get("/geteventsinmonth");
+			result.success(function(result1) {
+				$scope.body = result1;
+			});
+		});
+	</script> -->
 </body>
 </html>

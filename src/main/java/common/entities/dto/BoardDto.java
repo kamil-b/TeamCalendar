@@ -6,22 +6,20 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import common.entities.User;
 
 public class BoardDto {
 
-	@NotNull
 	@NotEmpty
-	@Column(unique=true)
 	private String name;
 	
 	private Long id;
 	private List<User> members = new ArrayList<User>();
 	
 	@NotEmpty
-	@NotNull
 	private String description;
 	
 	@NotNull

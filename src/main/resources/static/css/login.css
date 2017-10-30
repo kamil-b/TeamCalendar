@@ -3,6 +3,74 @@
     border-style: solid;
     border-width: 1px;
 }*/
+html {
+  position: relative;
+  min-height: 100%; }
+
+footer {
+  background-color: #211d1d;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  overflow: hidden; }
+
+.footer-content {
+  color: white;
+  text-align: center;
+  vertical-align: middle; }
+
+.footer-content p {
+  padding: 10px;
+  font-size: 12px; }
+
+.footer-content p a {
+  color: white; }
+
+.subbutton {
+  width: 100%;
+  border: 0;
+  color: white;
+  padding: 14px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; }
+
+.red {
+  background-color: #f44336; }
+
+.red:hover {
+  background-color: red; }
+
+.blue:hover {
+  background-color: #3696f9; }
+
+.blue {
+  background-color: #003366; }
+
+.grey {
+  background-color: dimgrey; }
+
+.grey:hover {
+  background-color: grey; }
+
+.event-HOMEWORK {
+  background-color: mediumvioletred; }
+
+.event-NO_EVENT {
+  background-color: gainsboro; }
+
+.event-VACATION {
+  background-color: greenyellow; }
+
+.event-SICK_LEAVE {
+  background-color: deepskyblue; }
+
+.event-TRAINING {
+  background-color: yellow; }
+
 .logincontainer {
   width: 400px;
   position: absolute;

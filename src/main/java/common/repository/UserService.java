@@ -1,20 +1,21 @@
 package common.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
+import org.springframework.transaction.annotation.Transactional;
 
+import common.entities.Board;
 import common.entities.User;
 import common.entities.dto.UserDto;
 import common.entities.enums.JobRole;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -23,6 +24,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private BoardRepository boardRepository;
 
 	public List<User> findAllByRole(JobRole role) {
 		return repository.findByRole(role);
@@ -36,9 +40,16 @@ public class UserService implements UserDetailsService {
 		repository.delete(id);
 	}
 
+	@Transactional
 	public void deleteUser(User user) {
-		logger.info("User: " + user.getName() + " email:" + user.getEmail() + " has been delated from database");
+/*		for(Board board: user.getBoards()){
+			board.removeUserFromBoard(user);
+			boardRepository.save(board);
+		}
+		user.setBoards(new ArrayList<Board>());
+		repository.save(user);*/
 		repository.delete(user);
+		logger.info("User: " + user.getName() + " email:" + user.getEmail() + " has been delated from database");
 	}
 
 	public User findById(Long id) {

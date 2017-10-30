@@ -1,3 +1,28 @@
+html {
+  position: relative;
+  min-height: 100%; }
+
+footer {
+  background-color: #211d1d;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  overflow: hidden; }
+
+.footer-content {
+  color: white;
+  text-align: center;
+  vertical-align: middle; }
+
+.footer-content p {
+  padding: 10px;
+  font-size: 12px; }
+
+.footer-content p a {
+  color: white; }
+
 .subbutton {
   width: 100%;
   border: 0;

@@ -19,21 +19,13 @@ import common.helpers.customannotations.PasswordMatches;
 @PasswordMatches
 public class UserDto {
 
-	@NotNull
-	@NotEmpty
 	@NotBlank
 	@Length(min = 5, message = "The field must be at least 5 characters")
 	private String name;
-	@NotNull
-	@NotEmpty
 	@NotBlank
 	private String password;
-	@NotNull
-	@NotEmpty
 	@NotBlank
 	private String matchingPassword;
-	@NotNull
-	@NotEmpty
 	@NotBlank
 	private String email;
 	private Long id;

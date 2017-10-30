@@ -102,3 +102,9 @@ li {
 .nopadding {
   padding: 0 !important;
   margin: 0 !important; }
+
+.alert-danger {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px; }
