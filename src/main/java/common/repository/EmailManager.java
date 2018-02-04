@@ -26,23 +26,12 @@ public class EmailManager {
 		helper.setSubject(subject);
 		helper.setText(content, true);
 		return mime;
-		//this.mailSender.send(mime);
-
 	}
 	
 	public void send(){
 		if(mimeMessage != null )
 		this.mailSender.send(mimeMessage);
 	}
-
-/*	public void placeOrder() {
-		SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
-		try {
-			this.mailSender.send(msg);
-		} catch (MailException ex) {
-			System.err.println(ex.getMessage());
-		}
-	}*/
 
 	public void prepeareMessage(String from, String[] to, String subject, String content) {
 		try {
@@ -51,7 +40,5 @@ public class EmailManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-
 }

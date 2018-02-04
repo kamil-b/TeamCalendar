@@ -64,12 +64,12 @@ public class AddEventsController {
 		User user = userService.findByName(principal.getName());
 
 		// TODO: move code below to eventService !
-		List<Event> upadatedEvents = new ArrayList<>();
+		List<Event> updatedEvents = new ArrayList<>();
 		for (EventDto eventDto : eventForm.getEventslist()) {
-			upadatedEvents.add(eventService.updateAndReturnUpdated(eventService.returnEvent(eventDto)));
+			updatedEvents.add(eventService.updateAndReturnUpdated(eventService.returnEvent(eventDto)));
 
 		}
-		eventForm.setEventslist((ArrayList<EventDto>) eventService.returnListOfEventDto(upadatedEvents));
+		eventForm.setEventslist((ArrayList<EventDto>) eventService.returnListOfEventDto(updatedEvents));
 		// end of TODO
 		if (content.isSendMail()) {
 			String contentOfMessage = prepeareMessageContent(user);
